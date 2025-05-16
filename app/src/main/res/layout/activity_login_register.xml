@@ -27,48 +27,54 @@
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background_normal"
+            android:fontFamily="@font/volkhov_bold"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:padding="12dp"
-            android:background="@android:drawable/editbox_background_normal"/>
+            android:padding="12dp" />
 
         <!-- Password -->
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:fontFamily="@font/volkhov_bold"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="12dp"
-            android:layout_marginTop="12dp"
-            android:background="@android:drawable/editbox_background_normal"/>
+            android:padding="12dp" />
 
         <!-- Remember Me -->
         <CheckBox
             android:id="@+id/rememberMeCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remember Me"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/zen_old_mincho_bold"
+            android:text="Remember Me" />
 
         <!-- Login Button -->
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#ADD8E6"
+            android:fontFamily="serif"
+            android:text="Login"
             android:textColor="#000000"
-            android:layout_marginTop="20dp"/>
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
 
         <!-- Switch to Register -->
         <TextView
             android:id="@+id/switchToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Register here"
-            android:textColor="#0000FF"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:text="Don't have an account? Register"
+            android:textColor="#4E4E6F"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

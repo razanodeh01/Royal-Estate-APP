@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,13 +24,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_register);
 
         // Initialize UI elements
-        emailInput = findViewById(R.id.emailInput);
-        passwordInput = findViewById(R.id.passwordInput);
-        rememberMeCheckbox = findViewById(R.id.rememberMeCheckbox);
+        emailInput = findViewById(R.id.loginEmail);
+        passwordInput = findViewById(R.id.loginPassword);
+        rememberMeCheckbox = findViewById(R.id.rememberMeCheckBox);
         loginButton = findViewById(R.id.loginButton);
+
 
         // Initialize helper and preferences
         databaseHelper = new DatabaseHelper(this);
