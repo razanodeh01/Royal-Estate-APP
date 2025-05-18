@@ -71,10 +71,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                // Move to next screen (replace HomeActivity with your actual next activity)
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
+
             } else {
                 Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
             }

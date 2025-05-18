@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+
+    <item
+        android:id="@+id/nav_properties"
+        android:title="Properties Menu"
+        android:icon="@drawable/ic_house" />
+
+    <item
+        android:id="@+id/nav_reservations"
+        android:title="Your Reservations"
+        android:icon="@drawable/ic_calendar" />
+
+    <item
+        android:id="@+id/nav_favorites"
+        android:title="Your Favorites"
+        android:icon="@drawable/ic_favorite" />
+
+    <item
+        android:id="@+id/nav_featured"
+        android:title="Featured Properties"
+        android:icon="@drawable/ic_star" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Profile Management"
+        android:icon="@drawable/ic_profile" />
+
+    <item
+        android:id="@+id/nav_contact"
+        android:title="Contact Us"
+        android:icon="@drawable/ic_contact" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_logout" />
+
+</menu>
