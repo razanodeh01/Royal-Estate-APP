@@ -6,17 +6,16 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/property_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Reservations"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:textSize="18sp"
+        android:text="Property ID" />
 
-    <ListView
-        android:id="@+id/reservations_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <Button
+        android:id="@+id/confirm_reservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Reservation" />
 
 </LinearLayout>

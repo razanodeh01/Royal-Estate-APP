@@ -63,7 +63,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginRegisterActivity.this, HomeActivity.class)); // or HomeActivity
+                Intent intent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
+                intent.putExtra("user_email", email);
+                startActivity(intent);
+                finish();
                 finish();
             } else {
                 Toast.makeText(this, "Incorrect email or password", Toast.LENGTH_SHORT).show();

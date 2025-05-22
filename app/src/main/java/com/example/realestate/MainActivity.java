@@ -7,10 +7,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     Button connectButton;
-    String AAPI_Url = "https://mocki.io/v1/f208b41b-12f1-45d0-9b74-2a635f184a2d";
+    String API_Url = "https://mocki.io/v1/5b613482-4ae2-4cf1-9ff8-0b340c40cd9b";
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,20 +27,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         connectButton = findViewById(R.id.button);
+        dbHelper = new DatabaseHelper(this);
 
         connectButton.setOnClickListener(view -> {
             Toast.makeText(MainActivity.this, "Connecting...", Toast.LENGTH_SHORT).show();
-            new ConnectionAsyncTask(MainActivity.this).execute(AAPI_Url);
+            new ConnectionAsyncTask(MainActivity.this).execute(API_Url);
         });
     }
 
-    public void onConnectionSuccess() {
-        // Optional: Show a success toast
-        Toast.makeText(this, "Connected Successfully!", Toast.LENGTH_SHORT).show();
+    public void onConnectionSuccess(String jsonResponse) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONArray properties = jsonObject.getJSONArray("properties");
+            for (int i = 0; i < properties.length(); i++) {
+                JSONObject property = properties.getJSONObject(i);
+                int id = property.getInt("id");
+                String title = property.getString("title");
+                String type = property.getString("type");
+                double price = property.getDouble("price");
+                String location = property.getString("location");
+                String area = property.getString("area");
+                int bedrooms = property.getInt("bedrooms");
+                int bathrooms = property.getInt("bathrooms");
+                String imageUrl = property.getString("image_url");
+                String description = property.getString("description");
 
-        // Navigate to login/register screen
-        Intent intent = new Intent(this, LoginRegisterActivity.class);
-        startActivity(intent);
+                // Replace placeholder URLs with a valid fallback or leave as is
+                if (imageUrl.contains("example.com")) {
+                    imageUrl = "https://i.imgur.com/Fi2nBVB.png"; // Example fallback
+                }
+
+                dbHelper.insertProperty(id, title, type, price, location, area, bedrooms, bathrooms, imageUrl, description);
+            }
+            Toast.makeText(this, "Connected Successfully!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginRegisterActivity.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            onConnectionFailed();
+        }
     }
 
     public void onConnectionFailed() {

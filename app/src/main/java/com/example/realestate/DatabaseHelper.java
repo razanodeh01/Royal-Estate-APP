@@ -9,11 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "RealEstateDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
+    // User table
     private static final String TABLE_USERS = "users";
-
-    // Columns
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_FIRST_NAME = "first_name";
@@ -24,14 +23,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CITY = "city";
     private static final String COLUMN_PHONE = "phone";
 
+    // Properties table
+    private static final String TABLE_PROPERTIES = "properties";
+    private static final String COLUMN_PROPERTY_ID = "property_id";
+    private static final String COLUMN_TITLE = "title";
+    private static final String COLUMN_TYPE = "type";
+    private static final String COLUMN_PRICE = "price";
+    private static final String COLUMN_LOCATION = "location";
+    private static final String COLUMN_AREA = "area";
+    private static final String COLUMN_BEDROOMS = "bedrooms";
+    private static final String COLUMN_BATHROOMS = "bathrooms";
+    private static final String COLUMN_IMAGE_URL = "image_url";
+    private static final String COLUMN_DESCRIPTION = "description";
+
+    // Favorites table
+    private static final String TABLE_FAVORITES = "favorites";
+    private static final String COLUMN_USER_EMAIL = "user_email";
+    private static final String COLUMN_FAVORITE_PROPERTY_ID = "property_id";
+
+    // Reservations table
+    private static final String TABLE_RESERVATIONS = "reservations";
+    private static final String COLUMN_RESERVATION_ID = "reservation_id";
+    private static final String COLUMN_RESERVATION_DATE = "reservation_date";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Create table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_USERS + "("
+        String createUsersTable = "CREATE TABLE " + TABLE_USERS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_EMAIL + " TEXT UNIQUE,"
                 + COLUMN_FIRST_NAME + " TEXT,"
@@ -42,22 +63,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_CITY + " TEXT,"
                 + COLUMN_PHONE + " TEXT"
                 + ")";
-        db.execSQL(createTable);
+        db.execSQL(createUsersTable);
+
+        String createPropertiesTable = "CREATE TABLE " + TABLE_PROPERTIES + "("
+                + COLUMN_PROPERTY_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_TITLE + " TEXT,"
+                + COLUMN_TYPE + " TEXT,"
+                + COLUMN_PRICE + " REAL,"
+                + COLUMN_LOCATION + " TEXT,"
+                + COLUMN_AREA + " TEXT,"
+                + COLUMN_BEDROOMS + " INTEGER,"
+                + COLUMN_BATHROOMS + " INTEGER,"
+                + COLUMN_IMAGE_URL + " TEXT,"
+                + COLUMN_DESCRIPTION + " TEXT"
+                + ")";
+        db.execSQL(createPropertiesTable);
+
+        String createFavoritesTable = "CREATE TABLE " + TABLE_FAVORITES + "("
+                + COLUMN_USER_EMAIL + " TEXT,"
+                + COLUMN_FAVORITE_PROPERTY_ID + " INTEGER,"
+                + "PRIMARY KEY (" + COLUMN_USER_EMAIL + "," + COLUMN_FAVORITE_PROPERTY_ID + "),"
+                + "FOREIGN KEY (" + COLUMN_USER_EMAIL + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_EMAIL + "),"
+                + "FOREIGN KEY (" + COLUMN_FAVORITE_PROPERTY_ID + ") REFERENCES " + TABLE_PROPERTIES + "(" + COLUMN_PROPERTY_ID + ")"
+                + ")";
+        db.execSQL(createFavoritesTable);
+
+        String createReservationsTable = "CREATE TABLE " + TABLE_RESERVATIONS + "("
+                + COLUMN_RESERVATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_USER_EMAIL + " TEXT,"
+                + COLUMN_FAVORITE_PROPERTY_ID + " INTEGER,"
+                + COLUMN_RESERVATION_DATE + " TEXT,"
+                + "FOREIGN KEY (" + COLUMN_USER_EMAIL + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_EMAIL + "),"
+                + "FOREIGN KEY (" + COLUMN_FAVORITE_PROPERTY_ID + ") REFERENCES " + TABLE_PROPERTIES + "(" + COLUMN_PROPERTY_ID + ")"
+                + ")";
+        db.execSQL(createReservationsTable);
     }
 
-    // Upgrade
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop old table if exists
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROPERTIES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }
 
-    // Insert user method
     public boolean insertUser(String email, String firstName, String lastName, String password, String gender, String country, String city, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(COLUMN_EMAIL, email);
         values.put(COLUMN_FIRST_NAME, firstName);
         values.put(COLUMN_LAST_NAME, lastName);
@@ -66,26 +119,88 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_COUNTRY, country);
         values.put(COLUMN_CITY, city);
         values.put(COLUMN_PHONE, phone);
-
         long result = db.insert(TABLE_USERS, null, values);
-        return result != -1; // returns true if insert successful
+        return result != -1;
     }
 
-    // Check if user exists (for login)
     public boolean checkUser(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + "=? AND " + COLUMN_PASSWORD + "=?";
         Cursor cursor = db.rawQuery(query, new String[]{email, password});
-
         boolean exists = cursor.getCount() > 0;
         cursor.close();
         return exists;
     }
 
-    // Optionally fetch user data by email (e.g. for profile)
     public Cursor getUserByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + "=?";
         return db.rawQuery(query, new String[]{email});
+    }
+
+    public boolean insertProperty(int id, String title, String type, double price, String location, String area, int bedrooms, int bathrooms, String imageUrl, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PROPERTY_ID, id);
+        values.put(COLUMN_TITLE, title);
+        values.put(COLUMN_TYPE, type);
+        values.put(COLUMN_PRICE, price);
+        values.put(COLUMN_LOCATION, location);
+        values.put(COLUMN_AREA, area);
+        values.put(COLUMN_BEDROOMS, bedrooms);
+        values.put(COLUMN_BATHROOMS, bathrooms);
+        values.put(COLUMN_IMAGE_URL, imageUrl);
+        values.put(COLUMN_DESCRIPTION, description);
+        long result = db.insert(TABLE_PROPERTIES, null, values);
+        return result != -1;
+    }
+
+    public Cursor getPropertiesByType(String type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_PROPERTIES + " WHERE " + COLUMN_TYPE + "=?";
+        return db.rawQuery(query, new String[]{type});
+    }
+
+    public boolean addToFavorites(String userEmail, int propertyId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_EMAIL, userEmail);
+        values.put(COLUMN_FAVORITE_PROPERTY_ID, propertyId);
+        long result = db.insert(TABLE_FAVORITES, null, values);
+        return result != -1;
+    }
+
+    public boolean addReservation(String userEmail, int propertyId, String reservationDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_EMAIL, userEmail);
+        values.put(COLUMN_FAVORITE_PROPERTY_ID, propertyId);
+        values.put(COLUMN_RESERVATION_DATE, reservationDate);
+        long result = db.insert(TABLE_RESERVATIONS, null, values);
+        return result != -1;
+    }
+
+    public Cursor getReservationsByUser(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT p.*, r." + COLUMN_RESERVATION_DATE + " FROM " + TABLE_PROPERTIES + " p " +
+                "INNER JOIN " + TABLE_RESERVATIONS + " r ON p." + COLUMN_PROPERTY_ID + " = r." + COLUMN_FAVORITE_PROPERTY_ID +
+                " WHERE r." + COLUMN_USER_EMAIL + "=?";
+        return db.rawQuery(query, new String[]{userEmail});
+    }
+
+    public Cursor getFavoritesByUser(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT p.* FROM " + TABLE_PROPERTIES + " p " +
+                "INNER JOIN " + TABLE_FAVORITES + " f ON p." + COLUMN_PROPERTY_ID + " = f." + COLUMN_FAVORITE_PROPERTY_ID +
+                " WHERE f." + COLUMN_USER_EMAIL + "=?";
+        return db.rawQuery(query, new String[]{userEmail});
+    }
+
+    public boolean removeFromFavorites(String userEmail, int propertyId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_FAVORITES,
+                COLUMN_USER_EMAIL + "=? AND " + COLUMN_FAVORITE_PROPERTY_ID + "=?",
+                new String[]{userEmail, String.valueOf(propertyId)});
+        return result > 0;
     }
 }
