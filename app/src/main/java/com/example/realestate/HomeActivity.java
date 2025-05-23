@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
+        getSupportActionBar().setTitle("Royal Estate");
         toggle.syncState();
 
         // Handle menu selection
