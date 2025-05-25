@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText emailInput, firstNameInput, lastNameInput, passwordInput, confirmPasswordInput, phoneInput;
     Spinner genderSpinner, countrySpinner, citySpinner;
     Button registerButton;
+    TextView switchToLogin;
 
     // Gender Options
     String[] genders = {"Select Gender", "Male", "Female", "Other"};
@@ -61,6 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(this, "Registration Failed: Email may already exist.", Toast.LENGTH_LONG).show();
                 }
             }
+
+        });
+        switchToLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginRegisterActivity.class);
+            startActivity(intent);
+            finish(); // optional
         });
 
     }
@@ -76,10 +84,12 @@ public class RegisterActivity extends AppCompatActivity {
         countrySpinner = findViewById(R.id.countrySpinner);
         citySpinner = findViewById(R.id.citySpinner);
         registerButton = findViewById(R.id.registerButton);
+        switchToLogin = findViewById(R.id.switchToLogIn);
     }
 
     private void setupGenderSpinner() {
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, genders);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, genders);
+        genderAdapter.setDropDownViewResource(R.layout.spinner_item);
         genderSpinner.setAdapter(genderAdapter);
     }
 
@@ -91,9 +101,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setupCountrySpinner() {
-        String[] countries = countryCityMap.keySet().toArray(new String[0]);
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, countries);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, countryCityMap.keySet().toArray(new String[0]));
+        countryAdapter.setDropDownViewResource(R.layout.spinner_item);
         countrySpinner.setAdapter(countryAdapter);
+
 
         // Handle country selection change
         countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -104,6 +115,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override public void onNothingSelected(AdapterView<?> parent) {}
+
+
         });
     }
 
@@ -111,8 +124,10 @@ public class RegisterActivity extends AppCompatActivity {
     private void updateCitySpinner(String country) {
         String[] cities = countryCityMap.get(country);
         if (cities == null) cities = new String[]{"Select City"};
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, cities);
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, cities);
+        cityAdapter.setDropDownViewResource(R.layout.spinner_item);
         citySpinner.setAdapter(cityAdapter);
+
     }
 
     private void updatePhoneCode(String country) {

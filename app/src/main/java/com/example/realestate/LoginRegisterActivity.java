@@ -31,7 +31,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
         rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
-        createAccountLink = findViewById(R.id.switchToRegister); // add in XML
+        createAccountLink = findViewById(R.id.switchToRegister);
 
         // DB
         databaseHelper = new DatabaseHelper(this);

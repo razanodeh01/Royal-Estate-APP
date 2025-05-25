@@ -2,115 +2,165 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="#FAF6EC">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="24dp"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+        <!-- Profile Icon -->
+        <ImageView
+            android:layout_width="78dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_profile" />
+
+        <!-- Title -->
         <TextView
-            android:layout_width="366dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Register to Royal Estate"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:layout_marginBottom="24dp"
-            android:fontFamily="@font/volkhov_bold"
-            android:text="Register with Royal Estate"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/volkhov_bold" />
+
+        <!-- First Name -->
+        <EditText
+            android:id="@+id/firstNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/edittext_background"
+            android:hint="First Name"
+            android:padding="12dp"
+            android:fontFamily="@font/volkhov_bold" />
+
+        <!-- Last Name -->
+        <EditText
+            android:id="@+id/lastNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Last Name"
+            android:padding="12dp"
+            android:fontFamily="@font/volkhov_bold" />
+
+        <!-- Gender -->
+        <Spinner
+            android:id="@+id/genderSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background" />
 
         <!-- Email -->
         <EditText
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:fontFamily="@font/volkhov_bold"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
-
-        <!-- First & Last Name -->
-
-        <EditText
-            android:id="@+id/firstNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/volkhov_bold"
-            android:hint="First Name" />
-
-        <EditText
-            android:id="@+id/lastNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/volkhov_bold"
-            android:hint="Last Name" />
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:fontFamily="@font/volkhov_bold" />
 
         <!-- Password -->
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="55dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/volkhov_bold"
+            android:background="@drawable/edittext_background"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:fontFamily="@font/volkhov_bold" />
 
         <!-- Confirm Password -->
         <EditText
             android:id="@+id/confirmPasswordInput"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/volkhov_bold"
-            android:hint="Confirm Password"
-            android:inputType="textPassword" />
-
-        <!-- Gender Spinner -->
-        <Spinner
-            android:id="@+id/genderSpinner"
-            android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:fontFamily="@font/volkhov_bold" />
 
-        <!-- Country Spinner -->
+        <!-- Country -->
         <Spinner
             android:id="@+id/countrySpinner"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="12dp" />
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background" />
 
-        <!-- City Spinner -->
+        <!-- City -->
         <Spinner
             android:id="@+id/citySpinner"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:layout_marginTop="12dp" />
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_background" />
 
         <!-- Phone Number -->
-
-        <!-- Register Button -->
-        <EditText
-            android:id="@+id/phoneInput"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="62dp"
+            android:layout_height="55dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/volkhov_bold"
-            android:hint="Phone Number"
-            android:inputType="phone" />
+            android:orientation="horizontal"
+            android:background="@drawable/edittext_background"
+            android:gravity="center_vertical">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp" />
+
+            <EditText
+                android:id="@+id/phoneInput"
+                android:layout_width="314dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/volkhov_bold"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- Sign Up Button -->
         <Button
             android:id="@+id/registerButton"
-            android:layout_width="282dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_width="181dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#ADD8E6"
-            android:fontFamily="serif"
-            android:text="Register"
+            android:fontFamily="@font/volkhov_bold"
+            android:text="Sign Up"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
+
+        <!-- Sign In Text -->
+        <TextView
+            android:id="@+id/switchToLogIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Log in"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/volkhov_bold" />
     </LinearLayout>
 </ScrollView>

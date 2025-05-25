@@ -75,6 +75,7 @@
             android:layout_marginTop="16dp"
             android:text="Don't have an account? Register"
             android:textColor="#4E4E6F"
+            android:fontFamily="@font/volkhov_bold"
             android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
