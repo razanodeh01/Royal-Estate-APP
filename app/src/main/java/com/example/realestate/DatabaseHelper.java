@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "RealEstateDB";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // User table
     private static final String TABLE_USERS = "users";
@@ -19,9 +19,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LAST_NAME = "last_name";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_GENDER = "gender";
-    private static final String COLUMN_COUNTRY = "country";
+    private static final String COLUMN_COUNTRY = "city";
     private static final String COLUMN_CITY = "city";
     private static final String COLUMN_PHONE = "phone";
+    private static final String COLUMN_PROFILE_PICTURE = "profile_picture";
 
     // Properties table
     private static final String TABLE_PROPERTIES = "properties";
@@ -61,7 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_GENDER + " TEXT,"
                 + COLUMN_COUNTRY + " TEXT,"
                 + COLUMN_CITY + " TEXT,"
-                + COLUMN_PHONE + " TEXT"
+                + COLUMN_PHONE + " TEXT,"
+                + COLUMN_PROFILE_PICTURE + " TEXT"
                 + ")";
         db.execSQL(createUsersTable);
 
@@ -101,11 +103,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATIONS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROPERTIES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        onCreate(db);
+        if (oldVersion < 3) {
+            db.execSQL("ALTER TABLE " + TABLE_USERS + " ADD COLUMN " + COLUMN_PROFILE_PICTURE + " TEXT");
+        } else {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATIONS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROPERTIES);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+            onCreate(db);
+        }
     }
 
     public boolean insertUser(String email, String firstName, String lastName, String password, String gender, String country, String city, String phone) {
@@ -119,6 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_COUNTRY, country);
         values.put(COLUMN_CITY, city);
         values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_PROFILE_PICTURE, (String) null);
         long result = db.insert(TABLE_USERS, null, values);
         return result != -1;
     }
@@ -136,6 +143,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + "=?";
         return db.rawQuery(query, new String[]{email});
+    }
+
+    public boolean updateFirstName(String email, String firstName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FIRST_NAME, firstName);
+        int result = db.update(TABLE_USERS, values, COLUMN_EMAIL + "=?", new String[]{email});
+        return result > 0;
+    }
+
+    public boolean updateLastName(String email, String lastName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LAST_NAME, lastName);
+        int result = db.update(TABLE_USERS, values, COLUMN_EMAIL + "=?", new String[]{email});
+        return result > 0;
+    }
+
+    public boolean updatePhone(String email, String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PHONE, phone);
+        int result = db.update(TABLE_USERS, values, COLUMN_EMAIL + "=?", new String[]{email});
+        return result > 0;
+    }
+
+    public boolean updatePassword(String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PASSWORD, password);
+        int result = db.update(TABLE_USERS, values, COLUMN_EMAIL + "=?", new String[]{email});
+        return result > 0;
+    }
+
+    public boolean updateProfilePicture(String email, String profilePicture) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PROFILE_PICTURE, profilePicture);
+        int result = db.update(TABLE_USERS, values, COLUMN_EMAIL + "=?", new String[]{email});
+        return result > 0;
+    }
+
+    public boolean verifyPassword(String email, String password) {
+        return checkUser(email, password);
     }
 
     public boolean insertProperty(int id, String title, String type, double price, String location, String area, int bedrooms, int bathrooms, String imageUrl, String description) {

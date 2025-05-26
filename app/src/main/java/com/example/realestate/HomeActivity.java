@@ -1,5 +1,6 @@
 package com.example.realestate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -70,6 +71,8 @@ public class HomeActivity extends AppCompatActivity {
         } else if (id == R.id.nav_contact) {
             selectedFragment = new ContactFragment();
         } else if (id == R.id.nav_logout) {
+            //go back to loginRegisterActivity
+            startActivity(new Intent(this, LoginRegisterActivity.class));
             finish();
             return true;
         }
