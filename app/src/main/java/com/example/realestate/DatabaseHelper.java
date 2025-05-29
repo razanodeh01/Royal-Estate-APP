@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LAST_NAME = "last_name";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_GENDER = "gender";
-    private static final String COLUMN_COUNTRY = "city";
+    private static final String COLUMN_COUNTRY = "country";
     private static final String COLUMN_CITY = "city";
     private static final String COLUMN_PHONE = "phone";
     private static final String COLUMN_PROFILE_PICTURE = "profile_picture";
