@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,11 +10,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Favorites"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/amaranth_bold"
         android:paddingBottom="8dp"
-        android:textColor="#000000" />
+        android:text="Your Favorites"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_list"
@@ -21,6 +23,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>

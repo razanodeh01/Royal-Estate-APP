@@ -1,7 +1,6 @@
 package com.example.realestate;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.PropertyViewHolder> {
@@ -53,17 +50,28 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
             holder.image.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        holder.favoriteButton.setOnClickListener(v -> {
-            boolean added = dbHelper.addToFavorites(userEmail, property.getId());
-            Toast.makeText(context, added ? "Added to Favorites" : "Already in Favorites", Toast.LENGTH_SHORT).show();
-        });
+        if (isFavorites) {
+            holder.favoriteButton.setText("Remove");
+            holder.favoriteButton.setOnClickListener(v -> {
+                dbHelper.removeFromFavorites(userEmail, property.getId());
+                properties.remove(position);
+                notifyItemRemoved(position);
+                Toast.makeText(context, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            holder.favoriteButton.setText("Favorite");
+            holder.favoriteButton.setOnClickListener(v -> {
+                boolean added = dbHelper.addToFavorites(userEmail, property.getId());
+                Toast.makeText(context, added ? "Added to Favorites" : "Already in Favorites", Toast.LENGTH_SHORT).show();
+            });
+        }
 
         holder.reserveButton.setOnClickListener(v -> {
             ReservationDialogFragment dialog = ReservationDialogFragment.newInstance(property.getId(), userEmail);
             dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "reservation_dialog");
         });
-
     }
+
 
     @Override
     public int getItemCount() {

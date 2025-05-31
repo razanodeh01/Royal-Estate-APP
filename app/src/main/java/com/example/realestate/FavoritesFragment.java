@@ -63,6 +63,7 @@ public class FavoritesFragment extends Fragment {
         if (adapter == null) {
             adapter = new PropertyAdapter(requireContext(), properties, userEmail, true);
             listView.setLayoutManager(new LinearLayoutManager(requireContext()));
+            listView.setAdapter(adapter);
 
         } else {
             adapter.updateProperties(properties);
