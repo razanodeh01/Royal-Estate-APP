@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class ReservationsFragment extends Fragment {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
     private DatabaseHelper dbHelper;
     private String userEmail;
     private ReservationAdapter adapter;
@@ -26,7 +27,7 @@ public class ReservationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservations, container, false);
 
-        listView = view.findViewById(R.id.reservations_list);
+        recyclerView = view.findViewById(R.id.reservations_recycler);
         dbHelper = new DatabaseHelper(requireContext());
         userEmail = requireActivity().getIntent().getStringExtra("user_email");
 
@@ -59,8 +60,9 @@ public class ReservationsFragment extends Fragment {
         cursor.close();
 
         if (adapter == null) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             adapter = new ReservationAdapter(requireContext(), reservations);
-            listView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
         } else {
             adapter.updateReservations(reservations);
         }

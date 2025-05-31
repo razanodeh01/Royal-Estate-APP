@@ -221,15 +221,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public boolean addReservation(String userEmail, int propertyId, String reservationDate) {
+    public boolean addReservation(String userEmail, int propertyId, String dateTime) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Check if this user already reserved this property
+        Cursor cursor = db.rawQuery("SELECT * FROM reservations WHERE user_email=? AND property_id=?",
+                new String[]{userEmail, String.valueOf(propertyId)});
+
+        boolean alreadyReserved = cursor.moveToFirst();
+        cursor.close();
+
+        if (alreadyReserved) {
+            return false;  // Already reserved, do not add
+        }
+
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_EMAIL, userEmail);
-        values.put(COLUMN_FAVORITE_PROPERTY_ID, propertyId);
-        values.put(COLUMN_RESERVATION_DATE, reservationDate);
-        long result = db.insert(TABLE_RESERVATIONS, null, values);
+        values.put("user_email", userEmail);
+        values.put("property_id", propertyId);
+        values.put("reservation_date", dateTime);
+
+        long result = db.insert("reservations", null, values);
         return result != -1;
     }
+
 
     public Cursor getReservationsByUser(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -254,4 +268,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{userEmail, String.valueOf(propertyId)});
         return result > 0;
     }
+
+    public boolean isPropertyReserved(String userEmail, int propertyId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT 1 FROM reservations WHERE user_email = ? AND property_id = ?",
+                new String[]{userEmail, String.valueOf(propertyId)}
+        );
+
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        return exists;
+    }
+
 }

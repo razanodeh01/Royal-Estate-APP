@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,17 +59,10 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
         });
 
         holder.reserveButton.setOnClickListener(v -> {
-            ReservationFragment fragment = new ReservationFragment();
-            Bundle args = new Bundle();
-            args.putInt("property_id", property.getId());
-            args.putString("user_email", userEmail);
-            fragment.setArguments(args);
-            ((FragmentActivity) context).getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.home_content, fragment)
-                    .addToBackStack(null)
-                    .commit();
+            ReservationDialogFragment dialog = ReservationDialogFragment.newInstance(property.getId(), userEmail);
+            dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "reservation_dialog");
         });
+
     }
 
     @Override
