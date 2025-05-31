@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/abhaya_libre_medium</item>
         <item>@font/agbalumo</item>
+        <item>@font/alegreya_sc_bold_italic</item>
         <item>@font/caveat_bold</item>
         <item>@font/lora_bold</item>
+        <item>@font/lora_bold_italic</item>
+        <item>@font/playfair_semibold</item>
         <item>@font/syncopate</item>
         <item>@font/walter_turncoat</item>
         <item>@font/zen_tokyo_zoo</item>

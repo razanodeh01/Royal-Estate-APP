@@ -1,68 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FAF6EC">
 
-    <!-- Filter UI -->
+    <!-- Search Bar with Filter Icon -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="4dp">
 
         <EditText
-            android:id="@+id/search_location"
+            android:id="@+id/search_bar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Location"
-            android:padding="8dp" />
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:fontFamily="@font/castoro"
+            android:hint="Search for price range, location, or property type"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spinner_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp" />
+        <ImageButton
+            android:id="@+id/filter_button_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_filter"
+            android:background="@drawable/rounded_icon_button"
+            android:scaleType="centerInside"
+            android:padding="10dp"
+            android:contentDescription="Filter"
+            android:elevation="4dp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/min_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Min Price"
-            android:inputType="numberDecimal"
-            android:padding="8dp" />
-
-        <EditText
-            android:id="@+id/max_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Max Price"
-            android:inputType="numberDecimal"
-            android:padding="8dp" />
-
-        <Button
-            android:id="@+id/filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filter" />
-
-    </LinearLayout>
-
-    <!-- ListView for properties -->
-    <ListView
-        android:id="@+id/properties_list"
+    <!-- RecyclerView for properties -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/properties_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical"
+        android:text="Properties"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>

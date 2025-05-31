@@ -10,16 +10,20 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
-    private ListView listView;
+    private RecyclerView listView;
     private DatabaseHelper dbHelper;
     private String userEmail;
     private PropertyAdapter adapter;
+
+
 
     @Nullable
     @Override
@@ -58,7 +62,8 @@ public class FavoritesFragment extends Fragment {
 
         if (adapter == null) {
             adapter = new PropertyAdapter(requireContext(), properties, userEmail, true);
-            listView.setAdapter(adapter);
+            listView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         } else {
             adapter.updateProperties(properties);
         }

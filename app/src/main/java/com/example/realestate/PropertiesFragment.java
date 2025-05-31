@@ -2,131 +2,153 @@ package com.example.realestate;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PropertiesFragment extends Fragment {
 
-    private ListView listView;
-    private Spinner typeSpinner;
-    private EditText locationEdit, minPriceEdit, maxPriceEdit;
-    private Button filterButton;
+    private RecyclerView recyclerView;
+    private EditText searchInput;
+    private ImageButton filterIcon;
     private DatabaseHelper dbHelper;
-    private String userEmail;
     private PropertyAdapter adapter;
+    private String userEmail;
+    private List<Property> allProperties = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_properties, container, false);
 
-        listView = view.findViewById(R.id.properties_list);
-        typeSpinner = view.findViewById(R.id.spinner_type);
-        locationEdit = view.findViewById(R.id.search_location);
-        minPriceEdit = view.findViewById(R.id.min_price);
-        maxPriceEdit = view.findViewById(R.id.max_price);
-        filterButton = view.findViewById(R.id.filter_button);
+        recyclerView = view.findViewById(R.id.properties_recycler);
+        searchInput = view.findViewById(R.id.search_bar);
+        filterIcon = view.findViewById(R.id.filter_button_icon);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         dbHelper = new DatabaseHelper(requireContext());
         userEmail = requireActivity().getIntent().getStringExtra("user_email");
 
-        if (userEmail == null) {
-            // Handle missing email (e.g., show error or redirect)
-        }
+        adapter = new PropertyAdapter(requireContext(), new ArrayList<>(), userEmail, false);
+        recyclerView.setAdapter(adapter);
 
-        // Populate spinner
-        List<String> types = Arrays.asList("All", "Apartment", "Villa", "Land");
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, types);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(typeAdapter);
+        loadAllProperties(); // Initially load all
 
-        // Load initial properties
-        loadProperties(null, null, null, null);
-
-        // Filter button
-        filterButton.setOnClickListener(v -> {
-            String type = typeSpinner.getSelectedItem().toString();
-            String location = locationEdit.getText().toString().trim();
-            String minPrice = minPriceEdit.getText().toString().trim();
-            String maxPrice = maxPriceEdit.getText().toString().trim();
-            loadProperties(type.equals("All") ? null : type, location, minPrice, maxPrice);
+        // Search as user types
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override public void afterTextChanged(Editable s) {
+                filterProperties(
+                        s.toString(),
+                        null, null, null, null // or cached filter state if using it
+                );
+            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
+
+
+        // Open FilterFragment on click
+        filterIcon.setOnClickListener(v -> {
+            FilterFragment dialog = new FilterFragment();
+            dialog.setOnFilterAppliedListener((min, max, loc, typ) -> {
+                String searchQuery = searchInput.getText().toString().trim();
+                filterProperties(searchQuery, min, max, loc, typ);
+            });
+            dialog.show(getParentFragmentManager(), "filter");
+        });
+
 
         return view;
     }
 
-    private void loadProperties(String type, String location, String minPrice, String maxPrice) {
-        List<Property> properties = new ArrayList<>();
-        String query = "SELECT * FROM properties";
-        String[] selectionArgs = null;
-        if (type != null) {
-            query += " WHERE type=?";
-            selectionArgs = new String[]{type};
-        }
-        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, selectionArgs);
+    private void loadAllProperties() {
+        allProperties.clear();
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM properties", null);
         if (cursor.moveToFirst()) {
             do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("property_id"));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                String propType = cursor.getString(cursor.getColumnIndexOrThrow("type"));
-                double price = cursor.getDouble(cursor.getColumnIndexOrThrow("price"));
-                String loc = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-                String area = cursor.getString(cursor.getColumnIndexOrThrow("area"));
-                int bedrooms = cursor.getInt(cursor.getColumnIndexOrThrow("bedrooms"));
-                int bathrooms = cursor.getInt(cursor.getColumnIndexOrThrow("bathrooms"));
-                String imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-
-                boolean matches = true;
-                if (location != null && !location.isEmpty() && !loc.toLowerCase().contains(location.toLowerCase())) {
-                    matches = false;
-                }
-                if (minPrice != null && !minPrice.isEmpty()) {
-                    try {
-                        if (price < Double.parseDouble(minPrice)) {
-                            matches = false;
-                        }
-                    } catch (NumberFormatException e) {
-                        // Handle invalid input (e.g., skip filter or show error)
-                    }
-                }
-                if (maxPrice != null && !maxPrice.isEmpty()) {
-                    try {
-                        if (price > Double.parseDouble(maxPrice)) {
-                            matches = false;
-                        }
-                    } catch (NumberFormatException e) {
-                        // Handle invalid input (e.g., skip filter or show error)
-                    }
-                }
-
-                if (matches) {
-                    properties.add(new Property(id, title, propType, price, loc, area, bedrooms, bathrooms, imageUrl, description));
-                }
+                allProperties.add(new Property(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("property_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("type")),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("location")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("area")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("bedrooms")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("bathrooms")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("image_url")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("description"))
+                ));
             } while (cursor.moveToNext());
         }
         cursor.close();
 
-        if (adapter == null) {
-            adapter = new PropertyAdapter(requireContext(), properties, userEmail, false);
-            listView.setAdapter(adapter);
-        } else {
-            adapter.updateProperties(properties);
-        }
+        adapter.updateProperties(new ArrayList<>(allProperties)); // Initial load
     }
+
+    private void filterProperties(String queryText, String minPrice, String maxPrice, String location, String type) {
+        List<Property> filtered = new ArrayList<>();
+
+        String q = queryText != null ? queryText.toLowerCase() : "";
+        boolean hasQuery = !q.isEmpty();
+        boolean hasMinPrice = minPrice != null && !minPrice.isEmpty();
+        boolean hasMaxPrice = maxPrice != null && !maxPrice.isEmpty();
+        boolean hasLocation = location != null && !location.equalsIgnoreCase("Any");
+        boolean hasType = type != null && !type.equalsIgnoreCase("Any");
+
+        for (Property p : allProperties) {
+            boolean matches = false;
+
+            // Search query (title, location, type, price)
+            if (hasQuery && (
+                    p.getTitle().toLowerCase().contains(q) ||
+                            p.getLocation().toLowerCase().contains(q) ||
+                            p.getType().toLowerCase().contains(q) ||
+                            String.valueOf(p.getPrice()).contains(q))) {
+                matches = true;
+            }
+
+            // Filters: match ANY
+            if (hasMinPrice) {
+                try {
+                    double min = Double.parseDouble(minPrice);
+                    if (p.getPrice() >= min) matches = true;
+                } catch (NumberFormatException ignored) {}
+            }
+
+            if (hasMaxPrice) {
+                try {
+                    double max = Double.parseDouble(maxPrice);
+                    if (p.getPrice() <= max) matches = true;
+                } catch (NumberFormatException ignored) {}
+            }
+
+            if (hasLocation && p.getLocation().equalsIgnoreCase(location)) {
+                matches = true;
+            }
+
+            if (hasType && p.getType().equalsIgnoreCase(type)) {
+                matches = true;
+            }
+
+            if (matches) {
+                filtered.add(p);
+            }
+        }
+
+        adapter.updateProperties(filtered);
+    }
+
 
     @Override
     public void onDestroy() {

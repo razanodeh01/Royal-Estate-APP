@@ -5,103 +5,100 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class PropertyAdapter extends ArrayAdapter<Property> {
+public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.PropertyViewHolder> {
 
-    private List<Property> properties;
-    private String userEmail;
-    private DatabaseHelper dbHelper;
+    private final Context context;
+    private final List<Property> properties;
+    private final String userEmail;
+    private final DatabaseHelper dbHelper;
     private boolean isFavorites;
 
     public PropertyAdapter(Context context, List<Property> properties, String userEmail, boolean isFavorites) {
-        super(context, 0, properties);
+        this.context = context;
         this.properties = properties;
         this.userEmail = userEmail;
         this.dbHelper = new DatabaseHelper(context);
         this.isFavorites = isFavorites;
     }
 
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    isFavorites ? R.layout.item_favorite : R.layout.item_property, parent, false);
-        }
+    public PropertyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_property, parent, false);
+        return new PropertyViewHolder(view);
+    }
 
+    @Override
+    public void onBindViewHolder(PropertyViewHolder holder, int position) {
         Property property = properties.get(position);
+        holder.title.setText(property.getTitle());
+        holder.description.setText(property.getDescription());
+        holder.price.setText(String.format("$%.2f", property.getPrice()));
+        holder.location.setText(property.getLocation());
 
-        TextView title = convertView.findViewById(R.id.property_title);
-        TextView description = convertView.findViewById(R.id.property_description);
-        TextView price = convertView.findViewById(R.id.property_price);
-        TextView location = convertView.findViewById(R.id.property_location);
-        ImageView image = convertView.findViewById(R.id.property_image);
-        Button favoriteButton = isFavorites ? null : convertView.findViewById(R.id.favorite_button);
-        Button reserveButton = convertView.findViewById(R.id.reserve_button);
-        Button removeButton = isFavorites ? convertView.findViewById(R.id.remove_button) : null;
-
-        title.setText(property.getTitle());
-        description.setText(property.getDescription());
-        price.setText(String.format("$%.2f", property.getPrice()));
-        location.setText(property.getLocation());
-
-        // Load image using ImageLoader
         String imageUrl = property.getImageUrl();
-        if (imageUrl != null && !imageUrl.isEmpty() && !imageUrl.contains("example.com")) {
-            ImageLoader.loadImage(imageUrl, image);
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            ImageLoader.loadImage(imageUrl, holder.image);
         } else {
-            image.setImageResource(R.drawable.ic_launcher_background);
+            holder.image.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        if (favoriteButton != null) {
-            favoriteButton.setOnClickListener(v -> {
-                boolean added = dbHelper.addToFavorites(userEmail, property.getId());
-                Toast.makeText(getContext(), added ? "Added to Favorites" : "Failed to add to Favorites", Toast.LENGTH_SHORT).show();
-            });
-        }
+        holder.favoriteButton.setOnClickListener(v -> {
+            boolean added = dbHelper.addToFavorites(userEmail, property.getId());
+            Toast.makeText(context, added ? "Added to Favorites" : "Already in Favorites", Toast.LENGTH_SHORT).show();
+        });
 
-        if (reserveButton != null) {
-            reserveButton.setOnClickListener(v -> {
-                ReservationFragment fragment = new ReservationFragment();
-                Bundle args = new Bundle();
-                args.putInt("property_id", property.getId());
-                args.putString("user_email", userEmail);
-                fragment.setArguments(args);
-                ((FragmentActivity) getContext()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.home_content, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            });
-        }
+        holder.reserveButton.setOnClickListener(v -> {
+            ReservationFragment fragment = new ReservationFragment();
+            Bundle args = new Bundle();
+            args.putInt("property_id", property.getId());
+            args.putString("user_email", userEmail);
+            fragment.setArguments(args);
+            ((FragmentActivity) context).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_content, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+    }
 
-        if (removeButton != null) {
-            removeButton.setOnClickListener(v -> {
-                boolean removed = dbHelper.removeFromFavorites(userEmail, property.getId());
-                if (removed) {
-                    properties.remove(position);
-                    notifyDataSetChanged();
-                    Toast.makeText(getContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Failed to remove from Favorites", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return properties.size();
     }
 
     public void updateProperties(List<Property> newProperties) {
-        this.properties.clear();
-        this.properties.addAll(newProperties);
+        properties.clear();
+        properties.addAll(newProperties);
         notifyDataSetChanged();
+    }
+
+    static class PropertyViewHolder extends RecyclerView.ViewHolder {
+        ImageView image;
+        TextView title, description, price, location;
+        Button favoriteButton;
+        Button reserveButton;
+
+        PropertyViewHolder(View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.property_image);
+            title = itemView.findViewById(R.id.property_title);
+            description = itemView.findViewById(R.id.property_description);
+            price = itemView.findViewById(R.id.property_price);
+            location = itemView.findViewById(R.id.property_location);
+            favoriteButton = itemView.findViewById(R.id.favorite_button);
+            reserveButton = itemView.findViewById(R.id.reserve_button);
+        }
     }
 }
