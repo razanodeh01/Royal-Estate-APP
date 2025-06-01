@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity {
+public class AdminRegisterActivity extends AppCompatActivity {
 
     EditText emailInput, firstNameInput, lastNameInput, passwordInput, confirmPasswordInput, phoneInput;
     Spinner genderSpinner, countrySpinner, citySpinner;
@@ -47,10 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String city = citySpinner.getSelectedItem().toString();
                 String phone = phoneInput.getText().toString().trim();
 
-                boolean insertResult = databaseHelper.insertUser(email, firstName, lastName, password, gender, country, city, phone, "user");
+                boolean insertResult = databaseHelper.insertUser(email, firstName, lastName, password, gender, country, city, phone, "admin");
                 if (insertResult) {
-                    Toast.makeText(this, "Registration Successful!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity2.class);
+                    Toast.makeText(this, "Admin Registration Successful!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdminRegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         switchToLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent intent = new Intent(AdminRegisterActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
@@ -186,6 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
             phoneInput.setError("Phone must be at least 10 digits");
             return false;
         }
+
         return true;
     }
 }

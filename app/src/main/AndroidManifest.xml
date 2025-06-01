@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,9 +21,17 @@
         android:theme="@style/Theme.RealEstate"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".AdminHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminRegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
-        <activity android:name=".LoginRegisterActivity" />
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".MainActivity"

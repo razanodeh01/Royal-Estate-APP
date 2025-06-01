@@ -18,7 +18,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     Button connectButton;
-    String API_Url = "https://mocki.io/v1/5b613482-4ae2-4cf1-9ff8-0b340c40cd9b";
+    String API_Url = "https://mocki.io/v1/070cc88d-4e9d-4eda-9e90-8059d2e05534";
     DatabaseHelper dbHelper;
 
     @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 String imageUrl = property.getString("image_url");
                 String description = property.getString("description");
 
-                if (imageUrl.contains("example.com")) {
+              /*  if (imageUrl.contains("example.com")) {
                     switch (id) {
                         case 104:
                             imageUrl = "https://i.imgur.com/5rdiVsm.png"; break;
@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity {
                             imageUrl = "https://i.imgur.com/Fi2nBVB.png"; // fallback
                     }
                 }
-
+*/
 
                 dbHelper.insertProperty(id, title, type, price, location, area, bedrooms, bathrooms, imageUrl, description);
             }
             Toast.makeText(this, "Connected Successfully!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoginRegisterActivity.class);
+            Intent intent = new Intent(this, MainActivity2.class);
             startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();

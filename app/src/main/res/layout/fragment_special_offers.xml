@@ -3,20 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FAF6EC">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Special Offers"
+        android:text="Manage Special Offers"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/zen_tokyo_zoo" />
+        android:layout_marginBottom="16dp" />
 
     <ListView
-        android:id="@+id/featured_properties_list"
+        android:id="@+id/properties_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

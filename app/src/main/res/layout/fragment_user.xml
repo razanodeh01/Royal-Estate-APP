@@ -11,18 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Title -->
         <TextView
             android:id="@+id/loginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login to Royal Estate"
+            android:text="User Login"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/zen_tokyo_zoo"/>
 
-        <!-- Email -->
         <EditText
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
@@ -33,7 +31,6 @@
             android:inputType="textEmailAddress"
             android:padding="12dp" />
 
-        <!-- Password -->
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="match_parent"
@@ -45,7 +42,6 @@
             android:inputType="textPassword"
             android:padding="12dp" />
 
-        <!-- Remember Me -->
         <CheckBox
             android:id="@+id/rememberMeCheckBox"
             android:layout_width="wrap_content"
@@ -54,7 +50,6 @@
             android:fontFamily="@font/zen_old_mincho_bold"
             android:text="Remember Me" />
 
-        <!-- Login Button -->
         <Button
             android:id="@+id/loginButton"
             android:layout_width="234dp"
@@ -67,7 +62,6 @@
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
-        <!-- Switch to Register -->
         <TextView
             android:id="@+id/switchToRegister"
             android:layout_width="wrap_content"

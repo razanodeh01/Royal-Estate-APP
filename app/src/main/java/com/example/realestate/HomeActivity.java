@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             selectedFragment = new ContactFragment();
         } else if (id == R.id.nav_logout) {
             //go back to loginRegisterActivity
-            startActivity(new Intent(this, LoginRegisterActivity.class));
+            startActivity(new Intent(this, MainActivity2.class));
             finish();
             return true;
         }

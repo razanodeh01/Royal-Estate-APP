@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_delete_customers"
+        android:title="Delete Customers" />
+    <item
+        android:id="@+id/nav_statistics"
+        android:title="Statistics Dashboard" />
+    <item
+        android:id="@+id/nav_add_admin"
+        android:title="Add New Admin" />
+    <item
+        android:id="@+id/nav_view_reservations"
+        android:title="View All Reservations" />
+    <item
+        android:id="@+id/nav_special_offers"
+        android:title="Create Special Offers" />
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout" />
+</menu>
