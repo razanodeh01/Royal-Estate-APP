@@ -5,19 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeaturedFragment extends Fragment {
 
-    private ListView propertiesListView;
+    private RecyclerView propertiesListView;
     private List<Property> propertiesList;
     private PropertyFeaturedAdapter adapter;
     private DatabaseHelper dbHelper;
@@ -44,10 +44,12 @@ public class FeaturedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_featured, container, false);
 
         propertiesListView = view.findViewById(R.id.featured_properties_list);
+        propertiesListView.setLayoutManager(new LinearLayoutManager(requireContext()));
         propertiesList = new ArrayList<>();
         adapter = new PropertyFeaturedAdapter(requireContext(), propertiesList, this::reserveProperty, this::toggleFavorite);
         propertiesListView.setAdapter(adapter);
         dbHelper = new DatabaseHelper(requireContext());
+
 
         loadSpecialOffers();
 
@@ -67,7 +69,9 @@ public class FeaturedFragment extends Fragment {
             int bedrooms = cursor.getInt(cursor.getColumnIndexOrThrow("bedrooms"));
             int bathrooms = cursor.getInt(cursor.getColumnIndexOrThrow("bathrooms"));
             boolean isFavorite = dbHelper.isPropertyFavorited(userEmail, id);
-            propertiesList.add(new Property(id, title, type, price, location, area, bedrooms, bathrooms, isFavorite));
+            String imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
+            propertiesList.add(new Property(id, title, type, price, location, area, bedrooms, bathrooms, imageUrl, isFavorite));
+
         }
         cursor.close();
         adapter.notifyDataSetChanged();
@@ -110,12 +114,13 @@ public class FeaturedFragment extends Fragment {
 
     // Helper class for property data
     static class Property {
+        public String imageUrl;
         int id, bedrooms, bathrooms;
         String title, type, location, area;
         double price;
         boolean isFavorite;
 
-        Property(int id, String title, String type, double price, String location, String area, int bedrooms, int bathrooms, boolean isFavorite) {
+        Property(int id, String title, String type, double price, String location, String area, int bedrooms, int bathrooms, String imageUrl, boolean isFavorite) {
             this.id = id;
             this.title = title;
             this.type = type;
@@ -125,6 +130,9 @@ public class FeaturedFragment extends Fragment {
             this.bedrooms = bedrooms;
             this.bathrooms = bathrooms;
             this.isFavorite = isFavorite;
+            this.imageUrl = imageUrl;
         }
     }
+
+
 }

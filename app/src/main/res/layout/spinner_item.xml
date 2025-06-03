@@ -4,5 +4,6 @@
     android:layout_height="wrap_content"
     android:padding="12dp"
     android:textColor="#000000"
+    android:background="#FFFFFF"
     android:textSize="16sp"
     android:fontFamily="@font/volkhov_bold" />

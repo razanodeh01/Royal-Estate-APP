@@ -1,36 +1,33 @@
 package com.example.realestate;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class PropertyFeaturedAdapter extends ArrayAdapter<FeaturedFragment.Property> {
+public class PropertyFeaturedAdapter extends RecyclerView.Adapter<PropertyFeaturedAdapter.ViewHolder> {
 
     private final Context context;
     private final List<FeaturedFragment.Property> properties;
     private final ReserveCallback reserveCallback;
     private final FavoriteCallback favoriteCallback;
+    ImageView imageView;
 
-    interface ReserveCallback {
+    public interface ReserveCallback {
         void onReserve(int propertyId);
     }
 
-    interface FavoriteCallback {
+    public interface FavoriteCallback {
         void onFavorite(int propertyId, boolean isFavorite);
     }
 
     public PropertyFeaturedAdapter(Context context, List<FeaturedFragment.Property> properties,
                                    ReserveCallback reserveCallback, FavoriteCallback favoriteCallback) {
-        super(context, 0, properties);
         this.context = context;
         this.properties = properties;
         this.reserveCallback = reserveCallback;
@@ -39,27 +36,51 @@ public class PropertyFeaturedAdapter extends ArrayAdapter<FeaturedFragment.Prope
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.property_featured_item, parent, false);
-        }
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.property_featured_item, parent, false);
+        return new ViewHolder(view);
+    }
 
-        FeaturedFragment.Property property = getItem(position);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        FeaturedFragment.Property property = properties.get(position);
 
-        TextView titleText = convertView.findViewById(R.id.property_title);
-        TextView detailsText = convertView.findViewById(R.id.property_details);
-        Button reserveButton = convertView.findViewById(R.id.reserve_button);
-        Button favoriteButton = convertView.findViewById(R.id.favorite_button);
-
-        titleText.setText(property.title);
-        detailsText.setText(String.format("Type: %s\nPrice: $%.2f\nLocation: %s\nArea: %s\nBedrooms: %d\nBathrooms: %d",
+        holder.titleText.setText(property.title);
+        holder.detailsText.setText(String.format("Type: %s\nPrice: $%.2f\nLocation: %s\nArea: %s\nBedrooms: %d\nBathrooms: %d",
                 property.type, property.price, property.location, property.area, property.bedrooms, property.bathrooms));
 
-        reserveButton.setOnClickListener(v -> reserveCallback.onReserve(property.id));
 
-        favoriteButton.setText(property.isFavorite ? "Unfavorite" : "Favorite");
-        favoriteButton.setOnClickListener(v -> favoriteCallback.onFavorite(property.id, !property.isFavorite));
+        if (property.imageUrl != null && !property.imageUrl.isEmpty()) {
+            ImageLoader.loadImage(property.imageUrl, holder.imageView); // Use your helper
+        } else {
+            holder.imageView.setImageResource(R.drawable.ic_launcher_background); // fallback image
+        }
 
-        return convertView;
+        holder.reserveButton.setOnClickListener(v -> reserveCallback.onReserve(property.id));
+
+        holder.favoriteButton.setText(property.isFavorite ? "Unfavorite" : "Favorite");
+        holder.favoriteButton.setOnClickListener(v -> favoriteCallback.onFavorite(property.id, !property.isFavorite));
     }
+
+
+    @Override
+    public int getItemCount() {
+        return properties.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView titleText, detailsText;
+        Button reserveButton, favoriteButton;
+        ImageView imageView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleText = itemView.findViewById(R.id.property_title);
+            detailsText = itemView.findViewById(R.id.property_details);
+            reserveButton = itemView.findViewById(R.id.reserve_button);
+            favoriteButton = itemView.findViewById(R.id.favorite_button);
+            imageView = itemView.findViewById(R.id.property_image);
+        }
+    }
+
 }

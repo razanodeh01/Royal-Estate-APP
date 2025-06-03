@@ -1,119 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="#FAF6EC">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <!-- Profile Picture -->
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            android:contentDescription="Profile Picture" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="164dp">
+
+            <!-- Circular Profile Image -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="161dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/circle_background"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/upload_picture_button"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="8dp"
+                android:contentDescription="Upload Profile Picture"
+                android:backgroundTint="@android:color/white"
+                app:cornerRadius="26dp"
+                app:icon="@drawable/ic_camera"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_picture"
+                app:layout_constraintEnd_toEndOf="@+id/profile_picture" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/edit_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/amaranth_bold"
+            android:hint="  First Name"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/amaranth_bold"
+            android:hint="  Last Name"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/amaranth_bold"
+            android:hint="  Phone Number"
+            android:inputType="phone"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/amaranth_bold"
+            android:hint="  New Password (leave blank to keep current)"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            />
+
+        <EditText
+            android:id="@+id/edit_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_background"
+            android:fontFamily="@font/amaranth_bold"
+            android:hint="  Confirm Password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            />
+
+        <!-- Save Button -->
         <Button
-            android:id="@+id/upload_picture_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/save_button"
+            android:layout_width="186dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Upload Picture"
-            android:layout_marginBottom="16dp" />
-
-        <!-- First Name -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/first_name_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="First Name"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/edit_first_name_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
-        </LinearLayout>
-
-        <!-- Last Name -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/last_name_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Last Name"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/edit_last_name_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
-        </LinearLayout>
-
-        <!-- Phone Number -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/phone_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Phone Number"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/edit_phone_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
-        </LinearLayout>
-
-        <!-- Password -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/password_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="********"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/edit_password_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
-        </LinearLayout>
+            android:backgroundTint="#4CAF50"
+            android:fontFamily="@font/volkhov_bold"
+            android:text="Save"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>

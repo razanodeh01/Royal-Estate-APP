@@ -1,7 +1,16 @@
 <resources>
     <style name="DrawerMenuTextStyle" parent="TextAppearance.AppCompat.Body1">
     <item name="android:fontFamily">@font/volkhov_bold</item>
-    <item name="android:textColor">#000000</item> <!-- Optional -->
-    <item name="android:textSize">16sp</item> <!-- Optional -->
-</style>
+    <item name="android:textColor">#000000</item>
+    <item name="android:textSize">16sp</item>
+
+    </style>
+
+    <style name="CameraButtonStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/circle_background</item>
+        <item name="android:padding">8dp</item>
+
+    </style>
+
+
 </resources>

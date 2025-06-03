@@ -52,48 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 String imageUrl = property.getString("image_url");
                 String description = property.getString("description");
 
-              /*  if (imageUrl.contains("example.com")) {
-                    switch (id) {
-                        case 104:
-                            imageUrl = "https://i.imgur.com/5rdiVsm.png"; break;
-                        case 105:
-                            imageUrl = "https://i.imgur.com/gA7pFEA.png"; break;
-                        case 106:
-                            imageUrl = "https://i.imgur.com/lHEjs1U.png"; break;
-                        case 107:
-                            imageUrl = "https://i.imgur.com/5cb3eMw.png"; break;
-                        case 108:
-                            imageUrl = "https://i.imgur.com/hG8rws6.png"; break;
-                        case 109:
-                            imageUrl = "https://i.imgur.com/MaicmDu.png"; break;
-                        case 110:
-                            imageUrl = "https://i.imgur.com/9tryWcf.png"; break;
-                        case 111:
-                            imageUrl = "https://i.imgur.com/2UCtvcm.png"; break;
-                        case 112:
-                            imageUrl = "https://i.imgur.com/dHqKVlO.png"; break;
-                        case 113:
-                            imageUrl = "https://i.imgur.com/JCZ1ChI.png"; break;
-                        case 114:
-                            imageUrl = "https://i.imgur.com/2xA4Xq2.png"; break;
-                        case 115:
-                            imageUrl = "https://i.imgur.com/xNhlAmk.png"; break;
-                        case 116:
-                            imageUrl = "https://i.imgur.com/DdE9lrN.png"; break;
-                        case 117:
-                            imageUrl = "https://i.imgur.com/hDX2jIR.png"; break;
-                        case 118:
-                            imageUrl = "https://i.imgur.com/VP7iuw3.png"; break;
-                        case 119:
-                            imageUrl = "https://i.imgur.com/FTeSQTA.png"; break;
-                        case 120:
-                            imageUrl = "https://i.imgur.com/6Z2jhOO.png"; break;
-                        default:
-                            imageUrl = "https://i.imgur.com/Fi2nBVB.png"; // fallback
-                    }
-                }
-*/
-
                 dbHelper.insertProperty(id, title, type, price, location, area, bedrooms, bathrooms, imageUrl, description);
             }
             Toast.makeText(this, "Connected Successfully!", Toast.LENGTH_SHORT).show();
