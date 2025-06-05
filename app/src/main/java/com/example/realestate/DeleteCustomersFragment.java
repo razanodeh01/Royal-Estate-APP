@@ -102,7 +102,7 @@ public class DeleteCustomersFragment extends Fragment {
             TextView emailText = convertView.findViewById(R.id.user_email);
             Button deleteButton = convertView.findViewById(R.id.delete_button);
 
-            emailText.setText(user.email + ": " + user.firstName + " " + user.lastName);
+            emailText.setText("Customer name: "+ user.firstName + " " + user.lastName);
             deleteButton.setOnClickListener(v -> callback.deleteUser(user.email));
 
             return convertView;

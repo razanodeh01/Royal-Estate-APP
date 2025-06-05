@@ -11,11 +11,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/amaranth_bold"
         android:textSize="16sp" />
 
     <CheckBox
         android:id="@+id/special_offer_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Special Offer" />
+        android:fontFamily="@font/lora_medium"
+        android:text="Special Offer"
+        android:textStyle="bold|italic" />
 </LinearLayout>

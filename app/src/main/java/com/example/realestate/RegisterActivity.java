@@ -22,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
     String[] genders = {"Select Gender", "Male", "Female", "Other"};
     HashMap<String, String[]> countryCityMap = new HashMap<>();
     DatabaseHelper databaseHelper;
+    String userType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String country = countrySpinner.getSelectedItem().toString();
                 String city = citySpinner.getSelectedItem().toString();
                 String phone = phoneInput.getText().toString().trim();
+                String userType = getIntent().getStringExtra("user_type");
+                if (userType == null) userType = "user"; // default
+
 
                 boolean insertResult = databaseHelper.insertUser(email, firstName, lastName, password, gender, country, city, phone, "user");
                 if (insertResult) {
@@ -58,8 +63,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         switchToLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(intent);
+            if ("admin".equals(userType)) {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class)); // Load AdminFragment via MainActivity
+            } else {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class)); // Load UserFragment via MainActivity
+            }
             finish();
         });
     }

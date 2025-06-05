@@ -91,7 +91,7 @@ public class ViewReservationsFragment extends Fragment {
 
             Reservation reservation = getItem(position);
             TextView textView = convertView.findViewById(R.id.reservation_info);
-            textView.setText(String.format("ID: %d\nCustomer: %s\nProperty: %s\nDate: %s",
+            textView.setText(String.format("Property ID: %d\n\nCustomer name: %s\n\nProperty type: %s\n\nDate: %s",
                     reservation.id, reservation.customerName, reservation.propertyTitle, reservation.date));
 
             return convertView;

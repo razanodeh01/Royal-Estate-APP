@@ -1,15 +1,17 @@
 package com.example.realestate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,8 +19,11 @@ import androidx.fragment.app.Fragment;
 public class AdminFragment extends Fragment {
 
     private EditText emailInput, passwordInput;
-    private Button loginButton, registerButton;
+    private TextView registerTextView;
+    private Button loginButton;
     private DatabaseHelper databaseHelper;
+    private CheckBox rememberMeCheckbox;
+    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
@@ -28,8 +33,10 @@ public class AdminFragment extends Fragment {
         emailInput = view.findViewById(R.id.adminEmail);
         passwordInput = view.findViewById(R.id.adminPassword);
         loginButton = view.findViewById(R.id.adminLoginButton);
-        registerButton = view.findViewById(R.id.adminRegisterButton);
+        rememberMeCheckbox = view.findViewById(R.id.rememberMeCheckBoxAdmin);
+        registerTextView = view.findViewById(R.id.switchToRegisterAdmin);
         databaseHelper = new DatabaseHelper(requireContext());
+        sharedPreferences = requireContext().getSharedPreferences("adminPrefs", Context.MODE_PRIVATE);
 
         loginButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
@@ -43,6 +50,17 @@ public class AdminFragment extends Fragment {
             boolean isValid = databaseHelper.checkUser(email, password, "admin");
             if (isValid) {
                 Toast.makeText(requireContext(), "Admin Login Successful", Toast.LENGTH_SHORT).show();
+
+                if (rememberMeCheckbox.isChecked()) {
+                    sharedPreferences.edit()
+                            .putBoolean("remember", true)
+                            .putString("email", email)
+                            .putString("password", password)
+                            .apply();
+                } else {
+                    sharedPreferences.edit().clear().apply();
+                }
+
                 Intent intent = new Intent(requireContext(), AdminHomeActivity.class);
                 intent.putExtra("user_email", email);
                 startActivity(intent);
@@ -52,11 +70,22 @@ public class AdminFragment extends Fragment {
             }
         });
 
-        registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), AdminRegisterActivity.class);
+        registerTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), RegisterActivity.class);
+            intent.putExtra("user_type", "admin");
             startActivity(intent);
+
         });
+
+        // Load saved values if any
+        boolean remember = sharedPreferences.getBoolean("remember", false);
+        if (remember) {
+            emailInput.setText(sharedPreferences.getString("email", ""));
+            passwordInput.setText(sharedPreferences.getString("password", ""));
+            rememberMeCheckbox.setChecked(true);
+        }
 
         return view;
     }
+
 }

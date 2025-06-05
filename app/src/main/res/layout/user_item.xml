@@ -8,15 +8,20 @@
     <TextView
         android:id="@+id/user_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:layout_weight="1"
-        android:textSize="16sp" />
+        android:fontFamily="@font/castoro"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
         android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF" />
+        android:fontFamily="@font/volkhov_bold"
+        android:text="Delete"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>

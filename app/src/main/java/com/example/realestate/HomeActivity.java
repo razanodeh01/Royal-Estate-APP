@@ -30,9 +30,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Initialize views
-        drawerLayout = findViewById(R.id.drawer_layout);
-        toolbar = findViewById(R.id.toolbar);
-        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout1);
+        toolbar = findViewById(R.id.toolbar1);
+        navigationView = findViewById(R.id.nav_view1);
 
         // Set toolbar as ActionBar
         setSupportActionBar(toolbar);

@@ -5,20 +5,30 @@
     android:background="#FAF6EC">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/volkhov_bold"
+            android:text="Login to Royal Estate"
+
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/walter_turncoat"
             android:text="Admin Access"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/zen_tokyo_zoo"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/adminEmail"
@@ -26,7 +36,7 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/editbox_background_normal"
             android:fontFamily="@font/volkhov_bold"
-            android:hint="Admin Email"
+            android:hint="Admin email"
             android:inputType="textEmailAddress"
             android:padding="12dp" />
 
@@ -37,32 +47,37 @@
             android:layout_marginTop="12dp"
             android:background="@android:drawable/editbox_background_normal"
             android:fontFamily="@font/volkhov_bold"
-            android:hint="Admin Password"
+            android:hint="Admin password"
             android:inputType="textPassword"
             android:padding="12dp" />
+        <CheckBox
+            android:id="@+id/rememberMeCheckBoxAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/zen_old_mincho_bold"
+            android:text="Remember Me" />
 
         <Button
             android:id="@+id/adminLoginButton"
-            android:layout_width="234dp"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="#ADD8E6"
             android:fontFamily="serif"
-            android:text="Admin Login"
+            android:text="Login as ADMIN"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
-        <Button
-            android:id="@+id/adminRegisterButton"
-            android:layout_width="234dp"
+        <TextView
+            android:id="@+id/switchToRegisterAdmin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#ADD8E6"
-            android:fontFamily="serif"
-            android:text="Register New Admin"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="normal|bold" />
+            android:text="Don't have an account? Register"
+            android:textColor="#4E4E6F"
+            android:fontFamily="@font/volkhov_bold"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

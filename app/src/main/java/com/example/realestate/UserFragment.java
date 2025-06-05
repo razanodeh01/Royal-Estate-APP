@@ -76,7 +76,10 @@ public class UserFragment extends Fragment {
         });
 
         createAccountLink.setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), RegisterActivity.class));
+            Intent intent = new Intent(requireContext(), RegisterActivity.class);
+            intent.putExtra("user_type", "user");
+            startActivity(intent);
+
         });
 
         return view;

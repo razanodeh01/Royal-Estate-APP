@@ -21,6 +21,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
     Spinner genderSpinner, countrySpinner, citySpinner;
     Button registerButton;
     TextView switchToLogin;
+    String userType;
     String[] genders = {"Select Gender", "Male", "Female", "Other"};
     HashMap<String, String[]> countryCityMap = new HashMap<>();
     DatabaseHelper databaseHelper;
@@ -47,7 +48,12 @@ public class AdminRegisterActivity extends AppCompatActivity {
                 String city = citySpinner.getSelectedItem().toString();
                 String phone = phoneInput.getText().toString().trim();
 
-                boolean insertResult = databaseHelper.insertUser(email, firstName, lastName, password, gender, country, city, phone, "admin");
+                userType = getIntent().getStringExtra("user_type");
+                if (userType == null) {
+                    userType = "admin";
+                }
+
+                boolean insertResult = databaseHelper.insertUser(email, firstName, lastName, password, gender, country, city, phone, userType);
                 if (insertResult) {
                     Toast.makeText(this, "Admin Registration Successful!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AdminRegisterActivity.this, MainActivity.class);
@@ -60,7 +66,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
         });
 
         switchToLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminRegisterActivity.this, MainActivity.class);
+            Intent intent = new Intent(AdminRegisterActivity.this, AdminFragment.class);
             startActivity(intent);
             finish();
         });
@@ -77,7 +83,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
         countrySpinner = findViewById(R.id.countrySpinner);
         citySpinner = findViewById(R.id.citySpinner);
         registerButton = findViewById(R.id.registerButton);
-        switchToLogin = findViewById(R.id.switchToLogIn);
+        switchToLogin = findViewById(R.id.switchToRegisterAdmin);
     }
 
     private void setupGenderSpinner() {
