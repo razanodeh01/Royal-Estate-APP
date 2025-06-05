@@ -17,10 +17,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#BE999890"
+            android:background="#FAF6EC"
+            android:elevation="4dp"
             android:title="Royal Estate"
-            android:titleTextColor="#000000"
-            android:elevation="4dp"/>
+            android:titleTextColor="#000000" />
 
         <!-- Fragment container -->
         <FrameLayout
@@ -29,19 +29,22 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <!-- Navigation Drawer (this should be outside LinearLayout!) -->
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:padding="12dp"
+        android:layout_gravity="start"
         android:paddingStart="24dp"
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
         app:itemTextAppearance="@style/DrawerMenuTextStyle"
         app:itemIconTint="@color/Yellow"
         app:itemTextColor="@color/black"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+        app:itemVerticalPadding="34dp" />
+
+
+
 </androidx.drawerlayout.widget.DrawerLayout>

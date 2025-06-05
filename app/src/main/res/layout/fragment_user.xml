@@ -15,11 +15,11 @@
             android:id="@+id/loginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Login"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:layout_marginBottom="24dp"
-            android:fontFamily="@font/zen_tokyo_zoo"/>
+            android:fontFamily="@font/volkhov_bold"
+            android:text="Login to Royal Estate"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/loginEmail"

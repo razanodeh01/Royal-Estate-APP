@@ -3,51 +3,53 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAF6EC"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    android:padding="16dp">
 
     <!-- Header -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contact RealEstateHub"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#212121"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/amaranth_bold"
         android:gravity="center"
-        android:layout_marginBottom="8dp" />
+        android:text="Contact RealEstateHub"
+        android:textColor="#212121"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="We're here to help you find your dream property!"
-        android:textSize="16sp"
-        android:textColor="#757575"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/lora_bold_italic"
         android:gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:text="We're here to help you find your dream property!"
+        android:textColor="#757575"
+        android:textSize="16sp" />
 
     <!-- Call Us Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
+        android:layout_marginBottom="16dp"
         card_view:cardBackgroundColor="#FFFFFF"
-        android:layout_marginBottom="16dp">
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="16dp">
 
             <ImageView
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_phone"
+                android:layout_height="95dp"
+                android:layout_marginEnd="16dp"
                 android:contentDescription="Phone Icon"
-                android:layout_marginEnd="16dp" />
+                android:src="@drawable/ic_phone" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -58,24 +60,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aclonica"
                     android:text="Call Us"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#212121"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="+970599000000"
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textColor="#0F0F0F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="Reach out to our team for assistance."
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textColor="#616060"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -83,10 +90,12 @@
                 android:id="@+id/call_us_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="#9CB6CA"
                 android:text="Call Now"
-                android:backgroundTint="#2196F3"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center_vertical" />
+                android:textColor="#121212"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -95,23 +104,23 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
+        android:layout_marginBottom="16dp"
         card_view:cardBackgroundColor="#FFFFFF"
-        android:layout_marginBottom="16dp">
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="16dp">
 
             <ImageView
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_location"
+                android:layout_height="109dp"
+                android:layout_marginEnd="16dp"
                 android:contentDescription="Location Icon"
-                android:layout_marginEnd="16dp" />
+                android:src="@drawable/ic_location" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -122,24 +131,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aclonica"
                     android:text="Locate Us"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#212121"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="Main Street, Ramallah, Palestine"
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textColor="#0F0F0F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="Visit our office for a consultation."
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textColor="#616060"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -147,10 +161,12 @@
                 android:id="@+id/locate_us_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="#9CB6CA"
                 android:text="View Map"
-                android:backgroundTint="#2196F3"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center_vertical" />
+                android:textColor="#121212"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -159,22 +175,22 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#FFFFFF"
         card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
-        card_view:cardBackgroundColor="#FFFFFF">
+        card_view:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="141dp"
             android:orientation="horizontal"
             android:padding="16dp">
 
             <ImageView
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_email"
+                android:layout_height="108dp"
+                android:layout_marginEnd="16dp"
                 android:contentDescription="Email Icon"
-                android:layout_marginEnd="16dp" />
+                android:src="@drawable/ic_email" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -185,24 +201,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aclonica"
                     android:text="Email Us"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#212121"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="RealEstateHub@agency.com"
+                    android:textColor="#0F0F0F"
                     android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/castoro"
                     android:text="Send us your inquiries anytime."
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:textColor="#616060"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -210,10 +231,12 @@
                 android:id="@+id/email_us_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="#9CB6CA"
                 android:text="Send Email"
-                android:backgroundTint="#2196F3"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center_vertical" />
+                android:textColor="#121212"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

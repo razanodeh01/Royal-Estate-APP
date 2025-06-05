@@ -1,12 +1,17 @@
 package com.example.realestate;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -31,6 +36,20 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set toolbar as ActionBar
         setSupportActionBar(toolbar);
+
+        TextView toolbarTitle = null;
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            View child = toolbar.getChildAt(i);
+            if (child instanceof TextView) {
+                toolbarTitle = (TextView) child;
+                break;
+            }
+        }
+
+        if (toolbarTitle != null) {
+            Typeface customFont = ResourcesCompat.getFont(this, R.font.volkhov_bold);
+            toolbarTitle.setTypeface(customFont);
+        }
 
         // Drawer toggle (hamburger icon)
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
