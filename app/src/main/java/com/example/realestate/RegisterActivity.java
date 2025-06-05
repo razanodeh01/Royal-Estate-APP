@@ -64,9 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         switchToLogin.setOnClickListener(v -> {
             if ("admin".equals(userType)) {
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class)); // Load AdminFragment via MainActivity
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             } else {
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class)); // Load UserFragment via MainActivity
+                startActivity(new Intent(RegisterActivity.this, MainActivity2.class));
             }
             finish();
         });

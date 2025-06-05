@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 public class AdminFragment extends Fragment {
 
     private EditText emailInput, passwordInput;
-    private TextView registerTextView;
     private Button loginButton;
     private DatabaseHelper databaseHelper;
     private CheckBox rememberMeCheckbox;
@@ -34,7 +33,6 @@ public class AdminFragment extends Fragment {
         passwordInput = view.findViewById(R.id.adminPassword);
         loginButton = view.findViewById(R.id.adminLoginButton);
         rememberMeCheckbox = view.findViewById(R.id.rememberMeCheckBoxAdmin);
-        registerTextView = view.findViewById(R.id.switchToRegisterAdmin);
         databaseHelper = new DatabaseHelper(requireContext());
         sharedPreferences = requireContext().getSharedPreferences("adminPrefs", Context.MODE_PRIVATE);
 
@@ -70,18 +68,10 @@ public class AdminFragment extends Fragment {
             }
         });
 
-        registerTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), RegisterActivity.class);
-            intent.putExtra("user_type", "admin");
-            startActivity(intent);
 
-        });
-
-        // Load saved values if any
         boolean remember = sharedPreferences.getBoolean("remember", false);
         if (remember) {
             emailInput.setText(sharedPreferences.getString("email", ""));
-            passwordInput.setText(sharedPreferences.getString("password", ""));
             rememberMeCheckbox.setChecked(true);
         }
 

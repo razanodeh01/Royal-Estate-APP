@@ -10,7 +10,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#FAF6EC"
+        android:background="#DBD3CE"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2

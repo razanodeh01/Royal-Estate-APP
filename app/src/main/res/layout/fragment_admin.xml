@@ -60,7 +60,7 @@
 
         <Button
             android:id="@+id/adminLoginButton"
-            android:layout_width="256dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="#ADD8E6"
@@ -70,14 +70,5 @@
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
-        <TextView
-            android:id="@+id/switchToRegisterAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Don't have an account? Register"
-            android:textColor="#4E4E6F"
-            android:fontFamily="@font/volkhov_bold"
-            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
