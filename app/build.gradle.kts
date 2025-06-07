@@ -9,6 +9,7 @@ android {
     namespace = "com.example.realestate"
     compileSdk = 35
 
+
     defaultConfig {
         applicationId = "com.example.realestate"
         minSdk = 26
@@ -44,4 +45,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+
 }

@@ -1,57 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FAF6EC"
+android:padding="16dp">
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#FAF6EC">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/total_users"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:fontFamily="@font/volkhov_bold"
+        android:text="Total Users: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/total_reservations"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Total Reservations: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/volkhov_bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/amaranth_bold"
-            android:text="Statistics Dashboard"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender Ratio: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/volkhov_bold" />
 
-        <TextView
-            android:id="@+id/users_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:text="Total Users: 0"
-            android:textSize="20sp" />
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/gender_pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="24dp"
+        tools:ignore="MissingClass" />
 
-        <TextView
-            android:id="@+id/reservations_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:text="Total Reservations: 0"
-            android:textSize="20sp" />
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/country_bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        tools:ignore="MissingClass" />
 
-        <TextView
-            android:id="@+id/top_countries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:text="Most Reserving Countries"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/gender_distribution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:text="Gender Distribution"
-            android:textSize="20sp" />
-    </LinearLayout>
+</LinearLayout>
 </ScrollView>
