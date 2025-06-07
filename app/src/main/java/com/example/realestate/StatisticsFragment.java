@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This fragment is used to display statistical insights
+ * related to users and reservations within the real estate agency app, specifically for the admin dashboard.
+ */
+
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -6,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import java.text.DecimalFormat;
 
 public class StatisticsFragment extends Fragment {
@@ -34,13 +38,13 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void loadStatistics() {
-        // User count
+
         usersCountText.setText(String.format("Total Users: %d", dbHelper.getUserCount()));
 
-        // Reservation count
+
         reservationsCountText.setText(String.format("Total Reservations: %d", dbHelper.getReservationCount()));
 
-        // Top countries
+
         StringBuilder countriesBuilder = new StringBuilder("Most Reserving Countries:\n");
         Cursor countryCursor = dbHelper.getTopReservingCountries();
         while (countryCursor.moveToNext()) {
@@ -51,7 +55,7 @@ public class StatisticsFragment extends Fragment {
         countryCursor.close();
         countriesText.setText(countriesBuilder.toString());
 
-        // Gender distribution
+
         Cursor genderCursor = dbHelper.getGenderDistribution();
         long total = dbHelper.getUserCount();
         StringBuilder genderBuilder = new StringBuilder("Gender Distribution:\n");

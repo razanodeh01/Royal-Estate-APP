@@ -1,3 +1,10 @@
+/**
+ * Description:
+ * This activity handles the registration process for admin users. It provides a user-friendly
+ * interface that allows an admin to input personal details, select their gender, country,
+ * and city, and create a secure account.
+ */
+
 package com.example.realestate;
 
 import android.content.Intent;
@@ -8,11 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.HashMap;
 
 public class AdminRegisterActivity extends AppCompatActivity {

@@ -1,10 +1,15 @@
+/**
+ * Description:
+ * MainActivity2 is the login gateway that offers users and admins a tabbed interface to access their respective login screens.
+ * It acts as a switchboard for authentication between the two roles.
+ */
+
 package com.example.realestate;
 
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;

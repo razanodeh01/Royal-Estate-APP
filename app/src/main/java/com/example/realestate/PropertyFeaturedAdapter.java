@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This adapter is used to display a list of featured (special offer) properties inside a RecyclerView,
+ * allowing users to favorite/unfavourite properties or reserve them. It is tailored for the FeaturedFragment.
+ */
+
 package com.example.realestate;
 
 import android.animation.AnimatorSet;
@@ -67,26 +73,26 @@ public class PropertyFeaturedAdapter extends RecyclerView.Adapter<PropertyFeatur
         holder.favoriteButton.setOnClickListener(v -> {
             boolean newFavoriteState = !property.isFavorite;
             favoriteCallback.onFavorite(property.id, newFavoriteState);
-            // Update button state immediately
+
             property.isFavorite = newFavoriteState;
             holder.favoriteButton.setText(newFavoriteState ? "Remove" : "Favorite");
             holder.favoriteButton.setIconResource(newFavoriteState ? R.drawable.ic_favourite_filled : R.drawable.ic_fav_item);
-            // Run animation only when adding to favorites
+
             if (newFavoriteState) {
                 AnimatorSet animatorSet = new AnimatorSet();
-                // Scale animation
+
                 ObjectAnimator scaleX = ObjectAnimator.ofFloat(holder.favoriteButton, "scaleX", 1f, 1.5f, 1f);
                 ObjectAnimator scaleY = ObjectAnimator.ofFloat(holder.favoriteButton, "scaleY", 1f, 1.5f, 1f);
                 scaleX.setDuration(600);
                 scaleY.setDuration(600);
-                // Icon tint animation
+
                 ValueAnimator colorAnimator = ValueAnimator.ofArgb(
                         Color.parseColor("#d9b65b"), Color.parseColor("#FF0000"));
                 colorAnimator.addUpdateListener(animation -> {
                     holder.favoriteButton.getIcon().setTint((int) animation.getAnimatedValue());
                 });
                 colorAnimator.setDuration(600);
-                // Play together
+
                 animatorSet.playTogether(scaleX, scaleY, colorAnimator);
                 animatorSet.start();
             }

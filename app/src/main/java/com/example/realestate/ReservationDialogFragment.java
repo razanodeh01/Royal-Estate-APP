@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This class implements a bottom sheet dialog fragment that allows users to confirm a reservation
+ * for a specific property in a smooth and intuitive popup interface.
+ */
+
 package com.example.realestate;
 
 import android.os.Bundle;
@@ -13,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 
 public class ReservationDialogFragment extends BottomSheetDialogFragment {
 

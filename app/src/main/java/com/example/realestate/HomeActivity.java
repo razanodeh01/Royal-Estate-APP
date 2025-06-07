@@ -1,3 +1,10 @@
+/**
+ * Description:
+ * `HomeActivity` serves as the main dashboard screen for regular users after successful login.
+ * It utilizes a `NavigationDrawer` to provide structured access to different feature-rich fragments
+ * of the app such as Home, Properties, Favorites, Reservations, Profile, and Contact sections.
+ */
+
 package com.example.realestate;
 
 import android.content.Intent;
@@ -6,7 +13,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +21,6 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -29,12 +34,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize views
+
         drawerLayout = findViewById(R.id.drawer_layout1);
         toolbar = findViewById(R.id.toolbar1);
         navigationView = findViewById(R.id.nav_view1);
 
-        // Set toolbar as ActionBar
+
         setSupportActionBar(toolbar);
 
         TextView toolbarTitle = null;
@@ -51,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
             toolbarTitle.setTypeface(customFont);
         }
 
-        // Drawer toggle (hamburger icon)
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -60,10 +65,10 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Royal Estate");
         toggle.syncState();
 
-        // Handle menu selection
+
         navigationView.setNavigationItemSelectedListener(this::handleMenuClick);
 
-        // Load default fragment (Home)
+
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
             navigationView.setCheckedItem(R.id.nav_home);
@@ -113,7 +118,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Close drawer first if open
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {

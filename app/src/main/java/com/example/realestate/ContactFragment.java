@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This fragment provides contact options for users to reach out to the real estate agency.
+ * It includes three main functionalities: calling the agency, locating it on the map, and sending an email.
+ */
+
 package com.example.realestate;
 
 import android.Manifest;
@@ -10,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -27,7 +32,6 @@ public class ContactFragment extends Fragment {
     private static final String AGENCY_LOCATION = "geo:31.9048,35.2034?q=RealEstateHub"; // Ramallah coordinates
 
     public ContactFragment() {
-        // Required empty public constructor
     }
 
     @Nullable
@@ -35,12 +39,11 @@ public class ContactFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        // Initialize buttons
         callUsButton = view.findViewById(R.id.call_us_button);
         locateUsButton = view.findViewById(R.id.locate_us_button);
         emailUsButton = view.findViewById(R.id.email_us_button);
 
-        // Initialize permission launcher
+
         callPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
             if (isGranted) {
                 startCall();
@@ -49,7 +52,7 @@ public class ContactFragment extends Fragment {
             }
         });
 
-        // Set button listeners
+
         callUsButton.setOnClickListener(v -> handleCallAction());
         locateUsButton.setOnClickListener(v -> handleLocateAction());
         emailUsButton.setOnClickListener(v -> handleEmailAction());

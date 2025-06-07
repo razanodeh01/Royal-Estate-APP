@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This fragment provides the admin with a complete overview of
+ * all property reservations made by users in the system.
+ */
+
 package com.example.realestate;
 
 import android.content.Context;
@@ -9,11 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +60,7 @@ public class ViewReservationsFragment extends Fragment {
         reservationAdapter.notifyDataSetChanged();
     }
 
-    // Helper class for reservation data
+
     static class Reservation {
         int id, propertyId;
         String userEmail, date, propertyTitle, customerName;
@@ -71,7 +75,7 @@ public class ViewReservationsFragment extends Fragment {
         }
     }
 
-    // Adapter for reservation list
+
     static class ReservationAdapter extends ArrayAdapter<Reservation> {
         private final Context context;
         private final List<Reservation> reservations;

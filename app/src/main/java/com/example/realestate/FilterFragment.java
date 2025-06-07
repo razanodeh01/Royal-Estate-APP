@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * `FilterFragment` is a modal dialog that allows users to refine their property search using custom filters.
+ * It enables filtering based on minimum and maximum price, property location, and type (e.g., Apartment, Villa, Land).
+ */
+
 package com.example.realestate;
 
 
@@ -53,7 +59,7 @@ public class FilterFragment extends DialogFragment {
 
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(
                 requireContext(),
-                R.layout.spinner_item, // your custom layout
+                R.layout.spinner_item,
                 locations
         );
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -61,13 +67,13 @@ public class FilterFragment extends DialogFragment {
 
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(
                 requireContext(),
-                R.layout.spinner_item, // your custom layout
+                R.layout.spinner_item,
                 types
         );
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
-        // Apply filter logic
+
         applyButton.setOnClickListener(v -> {
             String minPrice = minPriceInput.getText().toString().trim();
             String maxPrice = maxPriceInput.getText().toString().trim();

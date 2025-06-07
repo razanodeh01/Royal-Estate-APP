@@ -1,4 +1,12 @@
+/**
+ * Description:
+ * RegisterActivity handles the user registration process for both regular users
+ * and admins using a shared registration form (activity_register.xml).
+ * It collects personal details, validates input, and saves new users into the local SQLite database.
+ */
+
 package com.example.realestate;
+
 
 import android.content.Intent;
 import android.os.Bundle;

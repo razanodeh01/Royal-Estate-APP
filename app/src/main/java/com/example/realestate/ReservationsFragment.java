@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This class represents the "Your Reservations" screen in the user interface,
+ * allowing users to view a list of properties they have successfully reserved.
+ */
+
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -10,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

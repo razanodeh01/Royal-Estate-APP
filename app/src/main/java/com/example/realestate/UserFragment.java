@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This fragment handles the login functionality for regular users
+ * of the real estate app and allows navigation to the registration screen.
+ */
+
 package com.example.realestate;
 
 import android.content.Context;
@@ -12,7 +18,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

@@ -1,3 +1,14 @@
+/**
+ * Description:
+ * This fragment provides the login interface for admin users in the Real Estate agency application.
+ * It includes input fields for email and password, a "Remember Me" checkbox, and a login button.
+ * When credentials are validated against the database using the `DatabaseHelper`, the admin is
+ * redirected to the `AdminHomeActivity`. The fragment also supports storing and restoring login
+ * credentials using `SharedPreferences` when the "Remember Me" option is checked.
+ */
+
+
+
 package com.example.realestate;
 
 import android.content.Context;
@@ -10,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

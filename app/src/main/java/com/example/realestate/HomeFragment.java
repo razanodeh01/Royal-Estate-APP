@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * `HomeFragment` represents the landing page content shown to the user inside the main `HomeActivity`.
+ * This fragment is designed primarily to display a welcoming message and introductory paragraph about the application.
+ */
+
 package com.example.realestate;
 
 import android.os.Bundle;
@@ -7,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

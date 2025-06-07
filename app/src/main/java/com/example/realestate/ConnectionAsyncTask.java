@@ -1,7 +1,12 @@
+/**
+ * Description:
+ * This asynchronous task (`AsyncTask`) handles background HTTP GET requests to a specified API URL.
+ * It is designed to offload network operations from the main UI thread to ensure smooth user interaction.
+ */
+
 package com.example.realestate;
 
 import android.os.AsyncTask;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;

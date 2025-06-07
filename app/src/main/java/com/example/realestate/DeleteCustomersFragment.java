@@ -1,3 +1,10 @@
+/**
+ * Description:
+ * The `DeleteCustomersFragment` provides an administrative interface that allows admins to
+ * view and delete registered customer accounts from the system.
+ * It displays a list of users and includes a delete button for each entry, enabling quick account removal with real-time updates.
+ */
+
 package com.example.realestate;
 
 import android.content.Context;
@@ -11,11 +18,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +68,7 @@ public class DeleteCustomersFragment extends Fragment {
         }
     }
 
-    // Helper class for user data
+
     static class User {
         String email, firstName, lastName;
 
@@ -74,7 +79,7 @@ public class DeleteCustomersFragment extends Fragment {
         }
     }
 
-    // Adapter for user list
+
     static class UserAdapter extends ArrayAdapter<User> {
         private final Context context;
         private final List<User> users;

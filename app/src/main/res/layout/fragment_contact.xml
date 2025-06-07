@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Header -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:textColor="#757575"
         android:textSize="16sp" />
 
-    <!-- Call Us Card -->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Locate Us Card -->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Email Us Card -->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

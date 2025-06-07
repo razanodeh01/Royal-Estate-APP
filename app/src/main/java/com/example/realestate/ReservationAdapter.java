@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * This class is a custom RecyclerView adapter that handles displaying a list of Reservation objects in a scrollable list.
+ * It binds each reservation's property details and reservation date into a styled layout.
+ */
+
 package com.example.realestate;
 
 import android.content.Context;
@@ -6,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {

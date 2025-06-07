@@ -1,4 +1,11 @@
+/**
+ * Description:
+ * The Reservation class is a data model that represents
+ * a user’s reservation of a property, combining the reserved Property object with the date of reservation.
+ */
+
 package com.example.realestate;
+
 
 public class Reservation {
     private Property property;

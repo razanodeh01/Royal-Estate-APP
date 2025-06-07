@@ -1,4 +1,10 @@
+/**
+ * Description:
+ * The Property class is a data model that represents the structure of a real estate property listing in the application.
+ * It encapsulates all relevant information about a property, such as its type, location, price, and features.
+ */
 package com.example.realestate;
+
 
 public class Property {
     private int id;

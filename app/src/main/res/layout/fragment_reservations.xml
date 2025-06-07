@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FAF6EC"
     android:padding="16dp">
 
-    <!-- Title -->
+
     <TextView
         android:id="@+id/reservations_title"
         android:layout_width="wrap_content"
@@ -18,7 +19,7 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <!-- RecyclerView for reservation cards -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservations_recycler"
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>

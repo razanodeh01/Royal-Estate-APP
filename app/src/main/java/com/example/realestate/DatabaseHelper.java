@@ -1,3 +1,10 @@
+/**
+ * Description:
+ * The `DatabaseHelper` class is responsible for managing all database operations in the Real Estate agency application.
+ * It extends `SQLiteOpenHelper` and handles the creation, upgrade, and CRUD operations for multiple tables
+ * including users, properties, favorites, and reservations.
+ */
+
 package com.example.realestate;
 
 import android.content.ContentValues;
@@ -9,9 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "RealEstateDB";
-    private static final int DATABASE_VERSION = 4; // Incremented for role column
-
-    // User table
+    private static final int DATABASE_VERSION = 4;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_EMAIL = "email";
@@ -25,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROFILE_PICTURE = "profile_picture";
     private static final String COLUMN_ROLE = "role"; // Added role column
 
-    // Properties table
+
     private static final String TABLE_PROPERTIES = "properties";
     private static final String COLUMN_PROPERTY_ID = "property_id";
     private static final String COLUMN_TITLE = "title";
@@ -39,12 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_IS_SPECIAL_OFFER = "is_special_offer"; // Added for special offers
 
-    // Favorites table
+
     private static final String TABLE_FAVORITES = "favorites";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_FAVORITE_PROPERTY_ID = "property_id";
 
-    // Reservations table
+
     private static final String TABLE_RESERVATIONS = "reservations";
     private static final String COLUMN_RESERVATION_ID = "reservation_id";
     private static final String COLUMN_RESERVATION_DATE = "reservation_date";

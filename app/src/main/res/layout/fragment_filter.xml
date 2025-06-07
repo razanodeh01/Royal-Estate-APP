@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Filter Title -->
+
         <TextView
             android:layout_width="107dp"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
-        <!-- Price Range -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:padding="12dp" />
         </LinearLayout>
 
-        <!-- Location Filter -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_height="50dp"
              />
 
-        <!-- Property Type Filter -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             android:layout_height="50dp"
             />
 
-        <!-- Apply Button -->
+
         <Button
             android:id="@+id/apply_filter_button"
             android:layout_width="210dp"

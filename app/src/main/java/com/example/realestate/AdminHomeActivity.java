@@ -1,3 +1,11 @@
+/**
+ * Description:
+ * This activity serves as the main dashboard for admin users after successful login.
+ * It features a navigation drawer that allows the admin to switch between various
+ * management functionalities such as deleting customers, viewing statistics, managing
+ * reservations, offering promotions, and registering new admins.
+ */
+
 package com.example.realestate;
 
 import android.content.Intent;
@@ -5,7 +13,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;

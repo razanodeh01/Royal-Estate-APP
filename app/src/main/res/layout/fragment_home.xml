@@ -3,8 +3,6 @@
     android:layout_height="match_parent">
 
 
-    <!-- Background house image -->
-
 
 
     <ImageView
@@ -13,13 +11,13 @@
         android:scaleType="centerCrop"
         android:src="@drawable/house_bg" />
 
-    <!-- Semi-transparent overlay -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#BE999890"/>
 
-    <!-- Centered content -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

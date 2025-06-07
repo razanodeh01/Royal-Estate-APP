@@ -1,10 +1,15 @@
+/**
+ * Description:
+ * The ImageLoader class provides a utility for asynchronously loading images from a URL into an ImageView
+ * in Android applications. It includes a simple in-memory caching mechanism to improve performance
+ * and reduce redundant network requests.
+*/
 package com.example.realestate;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,16 +21,14 @@ public class ImageLoader {
     private static final Map<String, Bitmap> imageCache = new HashMap<>();
 
     public static void loadImage(String url, ImageView imageView) {
-        // Check cache first
         if (imageCache.containsKey(url)) {
             imageView.setImageBitmap(imageCache.get(url));
             return;
         }
 
-        // Use placeholder while loading
         imageView.setImageResource(R.drawable.ic_launcher_background);
 
-        // Start AsyncTask to download image
+
         new DownloadImageTask(imageView).execute(url);
     }
 
@@ -63,7 +66,6 @@ public class ImageLoader {
             if (result != null) {
                 imageView.setImageBitmap(result);
             } else {
-                // Keep placeholder if image fails to load
                 imageView.setImageResource(R.drawable.ic_launcher_background);
             }
         }

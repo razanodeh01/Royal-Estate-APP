@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * PropertyAdapter is a custom RecyclerView adapter used to display and manage property listings in the app.
+ * It serves as a bridge between the list of Property objects and the UI components shown in a scrolling list format.
+ */
+
 package com.example.realestate;
 
 import android.animation.Animator;
@@ -56,7 +62,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
             holder.image.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        // Set favorite button text, icon, and tint
+
         if (isFavorites) {
             holder.favoriteButton.setText("Remove");
             holder.favoriteButton.setIconResource(R.drawable.ic_favourite_filled);
@@ -94,7 +100,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
                 favoriteButton.setText("Remove");
                 favoriteButton.setIconResource(R.drawable.ic_favourite_filled);
                 favoriteButton.setIconTint(null);
-                // Run animation
+
                 AnimatorSet animatorSet = new AnimatorSet();
                 ObjectAnimator scaleX = ObjectAnimator.ofFloat(favoriteButton, "scaleX", 1f, 1.5f, 1f);
                 ObjectAnimator scaleY = ObjectAnimator.ofFloat(favoriteButton, "scaleY", 1f, 1.5f, 1f);

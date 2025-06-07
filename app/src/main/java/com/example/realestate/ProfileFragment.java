@@ -1,3 +1,11 @@
+/**
+ * Description:
+ * ProfileFragment allows users to view and update their personal profile information including
+ * first name, last name, phone number, password, and profile picture.
+ * It enhances personalization by supporting image uploads and data validation.
+ */
+
+
 package com.example.realestate;
 
 import android.Manifest;
@@ -14,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;

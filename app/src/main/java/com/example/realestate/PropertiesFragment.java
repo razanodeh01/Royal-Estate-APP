@@ -1,3 +1,8 @@
+/**
+ * Description:
+ * PropertiesFragment is responsible for displaying and filtering real estate listings in the app.
+ * It allows users to search by text, apply advanced filters (price range, type, and location), and browse properties with ease.
+ */
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -43,9 +48,9 @@ public class PropertiesFragment extends Fragment {
         adapter = new PropertyAdapter(requireContext(), new ArrayList<>(), userEmail, false);
         recyclerView.setAdapter(adapter);
 
-        loadAllProperties(); // Initially load all
+        loadAllProperties();
 
-        // Search as user types
+
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override public void afterTextChanged(Editable s) {
                 filterProperties(
@@ -58,7 +63,7 @@ public class PropertiesFragment extends Fragment {
         });
 
 
-        // Open FilterFragment on click
+
         filterIcon.setOnClickListener(v -> {
             FilterFragment dialog = new FilterFragment();
             dialog.setOnFilterAppliedListener((min, max, loc, typ) -> {
@@ -109,7 +114,7 @@ public class PropertiesFragment extends Fragment {
         for (Property p : allProperties) {
             boolean matches = false;
 
-            // Search query (title, location, type, price)
+
             if (hasQuery && (
                     p.getTitle().toLowerCase().contains(q) ||
                             p.getLocation().toLowerCase().contains(q) ||
@@ -118,7 +123,6 @@ public class PropertiesFragment extends Fragment {
                 matches = true;
             }
 
-            // Filters: match ANY
             if (hasMinPrice) {
                 try {
                     double min = Double.parseDouble(minPrice);

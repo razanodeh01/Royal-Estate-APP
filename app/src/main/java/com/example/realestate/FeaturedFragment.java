@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * The `FeaturedFragment` is responsible for displaying a curated list of special offer properties
+ * to the user. It provides functionality for users to mark properties as favorites or reserve them.
+ */
+
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -11,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +29,6 @@ public class FeaturedFragment extends Fragment {
     private String userEmail;
 
     public FeaturedFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -87,7 +91,7 @@ public class FeaturedFragment extends Fragment {
             return;
         }
 
-        // Use current date for simplicity; adjust as needed
+
         String dateTime = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
         boolean success = dbHelper.addReservation(userEmail, propertyId, dateTime);
         Toast.makeText(requireContext(), success ? "Property reserved" : "Property already reserved", Toast.LENGTH_SHORT).show();
@@ -112,7 +116,7 @@ public class FeaturedFragment extends Fragment {
         loadSpecialOffers();
     }
 
-    // Helper class for property data
+
     static class Property {
         public String imageUrl;
         int id, bedrooms, bathrooms;

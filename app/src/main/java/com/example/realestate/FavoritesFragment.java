@@ -1,3 +1,10 @@
+/**
+ * Description:
+ * The `FavoritesFragment` displays a list of properties that the current user has marked as favorites.
+ * It fetches data from the local SQLite database via the `DatabaseHelper`
+ * and presents it using a `RecyclerView` and custom `PropertyAdapter`.
+ */
+
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -5,14 +12,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 

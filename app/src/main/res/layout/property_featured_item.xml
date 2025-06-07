@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Property Image -->
+
         <ImageView
             android:id="@+id/property_image"
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="Property Image" />
 
-        <!-- Title -->
+
         <TextView
             android:id="@+id/property_title"
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Description/Details -->
+
         <TextView
             android:id="@+id/property_details"
             android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
             android:fontFamily="@font/volkhov_bold"
             android:textSize="15sp" />
 
-        <!-- Buttons Row -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
