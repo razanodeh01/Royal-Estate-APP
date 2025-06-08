@@ -47,7 +47,8 @@
                 android:fontFamily="@font/zen_old_mincho_bold"
                 android:hint="Minimum Price"
                 android:inputType="numberDecimal"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/max_price_filter"
@@ -59,7 +60,8 @@
                 android:fontFamily="@font/zen_old_mincho_bold"
                 android:hint="Maximum Price"
                 android:inputType="numberDecimal"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 

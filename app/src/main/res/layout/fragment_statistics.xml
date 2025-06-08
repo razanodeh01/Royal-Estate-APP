@@ -17,7 +17,7 @@ android:padding="16dp">
         android:layout_height="40dp"
         android:fontFamily="@font/volkhov_bold"
         android:text="Total Users: "
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -25,7 +25,7 @@ android:padding="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Reservations: "
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/volkhov_bold" />
@@ -34,7 +34,7 @@ android:padding="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender Ratio: "
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/volkhov_bold" />
@@ -45,6 +45,16 @@ android:padding="16dp">
         android:layout_height="350dp"
         android:layout_marginBottom="24dp"
         tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/countries"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Top Countries: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/volkhov_bold"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/country_bar_chart"

@@ -3,6 +3,8 @@
  * PropertiesFragment is responsible for displaying and filtering real estate listings in the app.
  * It allows users to search by text, apply advanced filters (price range, type, and location), and browse properties with ease.
  */
+
+
 package com.example.realestate;
 
 import android.database.Cursor;
@@ -55,7 +57,7 @@ public class PropertiesFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {
                 filterProperties(
                         s.toString(),
-                        null, null, null, null // or cached filter state if using it
+                        null, null, null, null
                 );
             }
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -112,37 +114,37 @@ public class PropertiesFragment extends Fragment {
         boolean hasType = type != null && !type.equalsIgnoreCase("Any");
 
         for (Property p : allProperties) {
-            boolean matches = false;
+            boolean matches = true;
 
-
-            if (hasQuery && (
-                    p.getTitle().toLowerCase().contains(q) ||
-                            p.getLocation().toLowerCase().contains(q) ||
-                            p.getType().toLowerCase().contains(q) ||
-                            String.valueOf(p.getPrice()).contains(q))) {
-                matches = true;
+            if (hasQuery) {
+                if (!(p.getTitle().toLowerCase().contains(q) ||
+                        p.getLocation().toLowerCase().contains(q) ||
+                        p.getType().toLowerCase().contains(q) ||
+                        String.valueOf(p.getPrice()).contains(q))) {
+                    matches = false;
+                }
             }
 
             if (hasMinPrice) {
                 try {
                     double min = Double.parseDouble(minPrice);
-                    if (p.getPrice() >= min) matches = true;
+                    if (p.getPrice() < min) matches = false;
                 } catch (NumberFormatException ignored) {}
             }
 
             if (hasMaxPrice) {
                 try {
                     double max = Double.parseDouble(maxPrice);
-                    if (p.getPrice() <= max) matches = true;
+                    if (p.getPrice() > max) matches = false;
                 } catch (NumberFormatException ignored) {}
             }
 
-            if (hasLocation && p.getLocation().equalsIgnoreCase(location)) {
-                matches = true;
+            if (hasLocation && !p.getLocation().equalsIgnoreCase(location)) {
+                matches = false;
             }
 
-            if (hasType && p.getType().equalsIgnoreCase(type)) {
-                matches = true;
+            if (hasType && !p.getType().equalsIgnoreCase(type)) {
+                matches = false;
             }
 
             if (matches) {
@@ -152,7 +154,6 @@ public class PropertiesFragment extends Fragment {
 
         adapter.updateProperties(filtered);
     }
-
 
     @Override
     public void onDestroy() {

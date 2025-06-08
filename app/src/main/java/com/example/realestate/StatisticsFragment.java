@@ -76,15 +76,22 @@ public class StatisticsFragment extends Fragment {
         genderCursor.close();
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(femalePercentage, "Female"));
-        entries.add(new PieEntry(malePercentage, "Male"));
-        entries.add(new PieEntry(otherPercentage, "Other"));
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        if (femalePercentage > 0f) {
+            entries.add(new PieEntry(femalePercentage, "Female"));
+            colors.add(Color.parseColor("#FF69B4")); // Pink
+        }
+        if (malePercentage > 0f) {
+            entries.add(new PieEntry(malePercentage, "Male"));
+            colors.add(Color.parseColor("#2196F3")); // Blue
+        }
+        if (otherPercentage > 0f) {
+            entries.add(new PieEntry(otherPercentage, "Other"));
+            colors.add(Color.parseColor("#FFD700")); // Yellow
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#FF69B4"));
-        colors.add(Color.parseColor("#2196F3"));
-        colors.add(Color.parseColor("#FFD700"));
         dataSet.setColors(colors);
         dataSet.setValueTextSize(20f);
         dataSet.setValueTextColor(Color.WHITE);
@@ -124,7 +131,7 @@ public class StatisticsFragment extends Fragment {
         countryCursor.close();
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Reservations per Country");
-        barDataSet.setColors(Color.parseColor("#FFA726"));
+        barDataSet.setColors(Color.parseColor("#ADD8E6"));
         barDataSet.setValueTextSize(14f);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTypeface(Typeface.create("times_new_roman", Typeface.BOLD));

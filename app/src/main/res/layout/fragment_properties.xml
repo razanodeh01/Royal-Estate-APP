@@ -26,7 +26,7 @@
             android:background="@drawable/edittext_background"
             android:drawableStart="@android:drawable/ic_menu_search"
             android:fontFamily="@font/castoro"
-            android:hint="Search for price range, location, or property type"
+            android:hint="Search for location, price or property type"
             android:inputType="text"
             android:padding="12dp"
             android:textStyle="bold" />
