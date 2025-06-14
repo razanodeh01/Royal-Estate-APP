@@ -1,4 +1,4 @@
-# 🏡 Royal Estate – Elegant Real Estate App (Android)
+# 🏡 Royal Estate – Elegant Real Estate App
 
 Welcome to **Royal Estate**, a modern and stylish real estate Android application designed to deliver a seamless experience for both property seekers and administrators.
 
